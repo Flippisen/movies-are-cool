@@ -5,13 +5,15 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
-    min-height: 56px;
+    height: $navbar-height;
     background-color: white;
+    position: fixed;
+    top: 0;
+    width: 100vw;
 
     @media only screen and (max-width: $mobile-breakpoint) {
-        position: fixed;
         bottom: 0;
-        width: 100vw;
+        top: unset;
     }
 }
 
@@ -21,10 +23,10 @@
     padding: 0 $padding-medium;
     padding-left: $padding-small;
     text-decoration: none;
-    color: #757575;
+    color: $navbar-link;
 
     &.active {
-        color: #1976d2;
+        color: $navbar-link-active;
     }
 
     @media only screen and (max-width: $mobile-breakpoint) {

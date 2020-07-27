@@ -1,5 +1,9 @@
+@import 'public/variables.scss';
+
 .App {
   text-align: center;
+  height: 100vh;
+  overflow: auto;
 }
 
 .App-logo {
