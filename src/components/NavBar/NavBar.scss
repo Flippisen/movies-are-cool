@@ -37,4 +37,8 @@
             width: 100%;
         }
     }
+
+    > div {
+        padding-left: $padding-small;
+    }
 }
