@@ -26,6 +26,6 @@ export default () => {
     }, [page]);
 
     return (
-        <div>{searchResults.toString()}</div>
+        <div></div>
     )
 }
