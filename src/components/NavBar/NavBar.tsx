@@ -8,18 +8,18 @@ import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
 export default function NavBar() {
     return (
         <div className='NavBar'>
-            <div className='NavItem'>
+            <NavLink exact to='/' className='NavItem'>
                 <SearchIcon></SearchIcon>
-                <NavLink exact to='/'>Search</NavLink>
-            </div>
-            <div className='NavItem'>
+                <div>Search</div>
+            </NavLink>
+            <NavLink to='/favourites' className='NavItem'>
                 <FavouriteIcon></FavouriteIcon>
-                <NavLink to='/favourites'>Favourites</NavLink>
-            </div>
-            <div className='NavItem'>
+                <div>Favourites</div>
+            </NavLink>
+            <NavLink to='/watch-later' className='NavItem'>
                 <PlaylistPlayIcon></PlaylistPlayIcon>
-                <NavLink to='/watch-later'>Watch Later</NavLink>
-            </div>
+                <div>Watch Later</div>
+            </NavLink>
         </div>
     )
 }
