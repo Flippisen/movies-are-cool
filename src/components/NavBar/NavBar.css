@@ -1,0 +1,11 @@
+.NavBar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height: 48px;
+}
+
+.NavItem {
+    padding: 0 16px;
+}
