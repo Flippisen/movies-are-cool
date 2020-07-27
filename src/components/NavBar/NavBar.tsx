@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import FavouriteIcon from '@material-ui/icons/Favorite';
 import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
 
-export default function NavBar() {
+export default () => {
     return (
         <div className='NavBar'>
             <NavLink exact to='/' className='NavItem'>

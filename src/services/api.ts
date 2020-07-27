@@ -1,5 +1,5 @@
-export const apiUrl = (route: string, params?: { [key: string]: string} ) => {
-    const baseUrl = `${process.env.REACT_APP_API_URL}/${route}?api_key=${process.env.REACT_APP_API_KEY}`;
+export const apiUrl = (route: string, params?: { [key: string]: (string | number | boolean) } ) => {
+    const baseUrl = `${process.env.REACT_APP_API_URL}${route}?api_key=${process.env.REACT_APP_API_KEY}`;
     if (!params) {
         return baseUrl;
     }
