@@ -33,7 +33,7 @@ export default (props: Props) => {
                         </div>
                         <div className='Rating'>
                             {movie.voteAverage}
-                            <StarRateIcon></StarRateIcon>
+                            <StarRateIcon className='StarIcon'></StarRateIcon>
                         </div>
                     </div>
                     <div className='ActionItems'>
