@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import React from 'react'
 
@@ -11,8 +11,15 @@ type FavouriteProviderProps = {children: React.ReactNode}
 
 const FavouriteContext = React.createContext<State | undefined>(undefined);
 
+const localStorageKey = 'favourites';
+
 export const FavouriteProvider = ({children}: FavouriteProviderProps) => {
-    const [favourites, setFavourites] = useState<number[]>([]);
+    const startValue = localStorage.getItem(localStorageKey);
+    const [favourites, setFavourites] = useState<number[]>(startValue ? JSON.parse(startValue) : []);
+
+    useEffect(() => {
+        localStorage.setItem(localStorageKey, JSON.stringify(favourites));
+    }, [favourites]);
 
     return <FavouriteContext.Provider value={{favourites, setFavourites}}>
         {children}

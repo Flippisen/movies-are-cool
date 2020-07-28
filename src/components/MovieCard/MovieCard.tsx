@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Movie } from '../../models/movie';
 import './MovieCard.scss';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
@@ -15,26 +15,47 @@ type Props = {
 export default (props: Props) => {
     const { setFavourites, favourites } = useFavouriteState();
     const { setWatchLaterList, watchLaterList } = useWatchLaterState();
+    const [isFavourite, setIsFavourite] = useState(false);
+    const [isOnWatchLater, setIsOnWatchLater] = useState(false);
     const movie = props.movie;
 
-    const isActive = (id: number, array: number[]) => {
-        return array.includes(id);
-    }
+    useEffect(() => {
+        setIsFavourite(favourites.includes(movie.id));
+        setIsOnWatchLater(watchLaterList.includes(movie.id));
+    }, [favourites, watchLaterList, movie.id]);
     
-    const removeFavourite = () => {
-
+    const removeFavourite = (id: number) => {
+        const idIndex = favourites.findIndex((item) => item === id);
+        if (idIndex < 0) {
+            return;
+        }
+        favourites.splice(idIndex, 1);
+        setFavourites([...favourites]);
     }
 
-    const removeWatchLater = () => {
-        
+    const removeWatchLater = (id: number) => {
+        const idIndex = watchLaterList.findIndex((item) => item === id);
+        if (idIndex < 0) {
+            return;
+        }
+        watchLaterList.splice(idIndex, 1);
+        setWatchLaterList([...watchLaterList]);
     }
 
     const addFavourite = (id: number) => {
+        if (favourites.includes(id)) {
+            removeFavourite(id);
+            return;
+        }
         setFavourites([...favourites, id]);
     }
 
-    const addWatchLater = () => {
-        
+    const addWatchLater = (id: number) => {
+        if (watchLaterList.includes(id)) {
+            removeWatchLater(id);
+            return;
+        }
+        setWatchLaterList([...watchLaterList, id]);
     }
 
     return (
@@ -61,10 +82,11 @@ export default (props: Props) => {
                         </div>
                     </div>
                     <div className='ActionItems'>
-                        <div className={isActive(movie.id, favourites) ? 'Active' : ''} onClick={e => addFavourite(movie.id)}>
+                        {isFavourite}
+                        <div className={isFavourite ? 'Active' : ''} onClick={e => addFavourite(movie.id)}>
                             <FavouriteIcon className='FavouriteIcon'></FavouriteIcon>
                         </div>
-                        <div className={isActive(movie.id, watchLaterList) ? 'Active' : ''}>
+                        <div className={isOnWatchLater ? 'Active' : ''} onClick={e => addWatchLater(movie.id)}>
                             <PlaylistAddIcon className='PlaylistAddIcon'></PlaylistAddIcon>
                         </div>
                     </div>
