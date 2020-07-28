@@ -1,0 +1,29 @@
+@import 'public/variables.scss';
+
+.SearchBarContainer {
+    width: 100%;
+    padding: $padding-small;
+}
+
+.SearchBar {
+    background-color: $off-background-colour;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $padding-small;
+
+    input {
+        outline: 0;
+        border: 0;
+        background-color: transparent;
+        font-size: 18px;
+        flex: 1 1 auto;
+
+        &::placeholder {
+            color: #94999b;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSearchState } from '../../../contexts/SearchContext';
 import SearchIcon from '@material-ui/icons/Search';
+import './SearchBar.scss';
 
 export default () => {
     const { setSearchTerm, searchTerm } = useSearchState();
@@ -10,9 +11,11 @@ export default () => {
     }
 
     return (
-        <div>
-            <input value={searchTerm} onChange={updateValue} placeholder='Search...'></input>
-            <SearchIcon></SearchIcon>
+        <div className='SearchBarContainer'>
+            <div className='SearchBar'>
+                <input value={searchTerm} onChange={updateValue} placeholder='Search...'></input>
+                <SearchIcon></SearchIcon>
+            </div>
         </div>
     )
 }
