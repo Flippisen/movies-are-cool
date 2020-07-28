@@ -2,7 +2,7 @@
 
 .CardContainer{
     flex: 0 0 20%;
-    height: 300px;
+    min-height: 300px;
     padding: $padding-small;
     overflow: hidden;
 }
@@ -12,11 +12,14 @@
     height: 100%;
     background-color: $off-background-colour;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .Poster {
     width: 100%;
-    height: 150px;
+    height: 200px;
     overflow: hidden;
 
     img {
@@ -27,4 +30,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.Details {
+    min-height: 100px;
+    padding: $padding-medium;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+
+.MovieTitle {
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+.MinorDetails {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    width: 100%;
+    height: 24px;
+}
+
+.Rating {
+    display: flex;
+    align-items: center;
 }

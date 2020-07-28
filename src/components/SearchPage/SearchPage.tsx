@@ -6,6 +6,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import MovieCard from '../MovieCard/MovieCard';
 import './SearchPage.scss';
 import SearchResults from './SearchResults/SearchResults';
+import { Movie } from '../../models/movie';
 
 export default () => {
     const [page, setPage] = useState(1);
@@ -32,8 +33,24 @@ export default () => {
             );
             const response = await results.json();
             setNumPages(response['total_pages']);
+            console.log(response['total_results']);
             setTotalResults(response['total_results']);
-            setSearchResults(response['results']);
+            setSearchResults(response['results'].map((result: any) => new Movie(
+                result.poster_path,
+                result.adult,
+                result.overview,
+                result.release_date,
+                result.genre_ids,
+                result.id,
+                result.original_title,
+                result.original_language,
+                result.title,
+                result.backdrop_path,
+                result.popularity,
+                result.vote_count,
+                result.video,
+                result.vote_average
+            )));
             setIsLoading(false);
         }
         getSearchResults();
