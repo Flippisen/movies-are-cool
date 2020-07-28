@@ -11,7 +11,7 @@ export default () => {
 
     return (
         <div>
-            <input value={searchTerm} onChange={updateValue}></input>
+            <input value={searchTerm} onChange={updateValue} placeholder='Search...'></input>
             <SearchIcon></SearchIcon>
         </div>
     )
