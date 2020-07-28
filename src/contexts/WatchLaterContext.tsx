@@ -24,5 +24,5 @@ export const useWatchLaterState = () => {
     if (context === undefined) {
         throw new Error('useWatchLaterState must be used within a WatchLaterProvider');
     }
-    return context
+    return context;
 }

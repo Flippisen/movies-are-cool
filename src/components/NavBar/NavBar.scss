@@ -25,7 +25,8 @@
     text-decoration: none;
     color: $navbar-link;
 
-    &.active {
+    &.active,
+    &:hover {
         color: $navbar-link-active;
     }
 

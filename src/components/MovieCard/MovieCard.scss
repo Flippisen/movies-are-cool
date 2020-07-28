@@ -77,13 +77,15 @@
 }
 
 .FavouriteIcon {
-    &:hover {
+    &:hover,
+    .Active & {
         fill: red;
     }
 }
 
 .PlaylistAddIcon {
-    &:hover {
+    &:hover,
+    .Active & {
         fill: $navbar-link-active;
     }
 }
