@@ -27,7 +27,7 @@ export default (props: Props) => {
                     </div>
                     <div className='MinorDetails'>
                         <div className='ReleaseYear'>
-                            {movie.releaseDate.getFullYear()}
+                            {isNaN(movie.releaseDate.getFullYear()) ? 'N/A' : movie.releaseDate.getFullYear()}
                         </div>
                         <div className='Rating'>
                             {movie.voteAverage}
