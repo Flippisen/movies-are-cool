@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { apiUrl } from '../../services/api';
-import { SearchProvider } from '../../contexts/SearchContext';
+import { useSearchState } from '../../contexts/SearchContext';
 
 export default () => {
     const [page, setPage] = useState(1);
     const [numPages, setNumPages] = useState(1);
     const [totalResults, setTotalResults] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const { setSearchResults, searchResults } = useSearchState();
 
     useEffect(() => {
         const getSearchResults = async () => {
@@ -26,7 +27,6 @@ export default () => {
     }, [page]);
 
     return (
-        <SearchProvider>
-        </SearchProvider>
+        <div></div>
     )
 }

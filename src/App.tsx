@@ -3,6 +3,7 @@ import './App.scss';
 import NavBar from './components/NavBar/NavBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SearchPage from './components/SearchPage/SearchPage';
+import { SearchProvider } from './contexts/SearchContext';
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
       <div className='App'>
         <Switch>
           <Route path='/'>
-            <SearchPage></SearchPage>
+            <SearchProvider>
+              <SearchPage></SearchPage>
+            </SearchProvider>
           </Route>
           <Route path='/favourites'>
             <div>Not Implemented</div>
