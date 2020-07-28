@@ -9,21 +9,21 @@ function App() {
   return (
     <Router>
       <NavBar></NavBar>
-      <div className='App'>
-        <Switch>
-          <Route path='/'>
-            <SearchProvider>
-              <SearchPage></SearchPage>
-            </SearchProvider>
-          </Route>
-          <Route path='/favourites'>
-            <div>Not Implemented</div>
-          </Route>
-          <Route path='/watch-later'>
-            <div>Not Implemented</div>
-          </Route>
-        </Switch>
-      </div>
+      <SearchProvider>
+        <div className='App'>
+          <Switch>
+            <Route exact path='/'>
+                <SearchPage></SearchPage>
+            </Route>
+            <Route path='/favourites'>
+              <div>Not Implemented</div>
+            </Route>
+            <Route path='/watch-later'>
+              <div>Not Implemented</div>
+            </Route>
+          </Switch>
+        </div>
+      </SearchProvider>
     </Router>
   );
 }
