@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { apiUrl } from '../../services/api';
 import { useSearchState } from '../../contexts/SearchContext';
+import SearchBar from './SearchBar/SearchBar';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export default () => {
     const [page, setPage] = useState(1);
     const [numPages, setNumPages] = useState(1);
     const [totalResults, setTotalResults] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
-    const { setSearchResults, searchResults } = useSearchState();
+    const { setSearchResults, searchTerm } = useSearchState();
+    const debouncedSearchTerm = useDebounce<string>(searchTerm, 150);
 
     useEffect(() => {
         const getSearchResults = async () => {
+            if (debouncedSearchTerm === '') {
+                return;
+            }
             const results = await fetch(
-                apiUrl('/search/movie', { query: 'mad max', page: page}),
+                apiUrl('/search/movie', { query: debouncedSearchTerm, page: page}),
                 {
                     method: 'GET'
                 }
@@ -24,9 +30,11 @@ export default () => {
             setIsLoading(false);
         }
         getSearchResults();
-    }, [page]);
+    }, [page, debouncedSearchTerm]);
 
     return (
-        <div></div>
+        <div>
+            <SearchBar></SearchBar>
+        </div>
     )
 }
