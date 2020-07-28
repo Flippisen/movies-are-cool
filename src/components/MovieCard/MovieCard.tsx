@@ -3,7 +3,7 @@ import { Movie } from '../../models/movie';
 import './MovieCard.scss';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 import StarRateIcon from '@material-ui/icons/StarRate';
-import FavouriteOutlineIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavouriteIcon from '@material-ui/icons/Favorite';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
 type Props = {
@@ -37,8 +37,8 @@ export default (props: Props) => {
                         </div>
                     </div>
                     <div className='ActionItems'>
-                        <FavouriteOutlineIcon></FavouriteOutlineIcon>
-                        <PlaylistAddIcon></PlaylistAddIcon>
+                        <FavouriteIcon className='FavouriteIcon'></FavouriteIcon>
+                        <PlaylistAddIcon className='PlaylistAddIcon'></PlaylistAddIcon>
                     </div>
                 </div>
             </div>
