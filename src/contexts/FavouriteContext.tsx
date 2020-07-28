@@ -19,10 +19,10 @@ export const FavouriteProvider = ({children}: FavouriteProviderProps) => {
     </FavouriteContext.Provider>
 }
 
-export const useSearchState = () => {
+export const useFavouriteState = () => {
     const context = React.useContext<State | undefined>(FavouriteContext);
     if (context === undefined) {
-        throw new Error('useSearchState must be used within a FavouriteProvider');
+        throw new Error('useFavouriteState must be used within a FavouriteProvider');
     }
     return context
 }
