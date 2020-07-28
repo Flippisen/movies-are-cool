@@ -7,8 +7,10 @@ type Props = {
 };
 
 export default (props: Props) => {
+    const movie = props.movie;
     return (
         <div className='Card'>
+            { movie.title }
             <div className='Poster'>
 
             </div>

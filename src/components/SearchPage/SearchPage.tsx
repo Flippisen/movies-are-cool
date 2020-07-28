@@ -3,6 +3,9 @@ import { apiUrl } from '../../services/api';
 import { useSearchState } from '../../contexts/SearchContext';
 import SearchBar from './SearchBar/SearchBar';
 import { useDebounce } from '../../hooks/useDebounce';
+import MovieCard from '../MovieCard/MovieCard';
+import './SearchPage.scss';
+import SearchResults from './SearchResults/SearchResults';
 
 export default () => {
     const [page, setPage] = useState(1);
@@ -35,6 +38,7 @@ export default () => {
     return (
         <div>
             <SearchBar></SearchBar>
+            <SearchResults></SearchResults>
         </div>
     )
 }
