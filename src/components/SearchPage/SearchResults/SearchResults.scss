@@ -1,4 +1,7 @@
+@import 'public/variables.scss';
+
 .Results {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }

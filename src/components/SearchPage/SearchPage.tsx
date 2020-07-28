@@ -17,7 +17,11 @@ export default () => {
 
     useEffect(() => {
         const getSearchResults = async () => {
+            setPage(1);
             if (debouncedSearchTerm === '') {
+                setSearchResults([]);
+                setNumPages(1);
+                setTotalResults(0);
                 return;
             }
             const results = await fetch(

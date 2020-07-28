@@ -1,3 +1,30 @@
+@import 'public/variables.scss';
+
+.CardContainer{
+    flex: 0 0 20%;
+    height: 300px;
+    padding: $padding-small;
+    overflow: hidden;
+}
+
 .Card {
-    flex: 1 1 20%;
+    width: 100%;
+    height: 100%;
+    background-color: $off-background-colour;
+    border-radius: 5px;
+}
+
+.Poster {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
