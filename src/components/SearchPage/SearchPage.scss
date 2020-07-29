@@ -18,4 +18,8 @@
     padding: $padding-small;
     color: white;
     cursor: pointer;
+
+    @media only screen and (max-width: $mobile-breakpoint) {
+        width: 100%;
+    }
 }
