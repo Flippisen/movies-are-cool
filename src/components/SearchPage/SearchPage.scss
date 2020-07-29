@@ -1,0 +1,21 @@
+@import 'public/variables.scss';
+
+.ButtonContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: $padding-medium;
+}
+
+.Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: $navbar-link-active;
+    border-radius: 5px;
+    padding: $padding-small;
+    color: white;
+    cursor: pointer;
+}

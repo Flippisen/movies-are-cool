@@ -5,15 +5,15 @@ import SearchBar from './SearchBar/SearchBar';
 import { useDebounce } from '../../hooks/useDebounce';
 import MovieCard from '../MovieCard/MovieCard';
 import './SearchPage.scss';
-import SearchResults from './SearchResults/SearchResults';
 import { Movie } from '../../models/movie';
+import SearchResults from './SearchResults/SearchResults';
 
 export default () => {
     const [page, setPage] = useState(1);
     const [numPages, setNumPages] = useState(1);
     const [totalResults, setTotalResults] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
-    const { setSearchResults, searchTerm } = useSearchState();
+    const { setSearchResults, searchTerm, searchResults } = useSearchState();
     const debouncedSearchTerm = useDebounce<string>(searchTerm, 150);
 
     useEffect(() => {
@@ -60,6 +60,14 @@ export default () => {
         <div>
             <SearchBar></SearchBar>
             <SearchResults></SearchResults>
+            {
+                totalResults > 0 && totalResults !== searchResults.length &&
+                <div className='ButtonContainer'>
+                    <div className='Button LoadMore'>
+                        Load more
+                    </div>
+                </div>
+            }
         </div>
     )
 }
