@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Movie } from '../../models/movie';
 import MovieCard from './MovieCard';
 import { FavouriteProvider } from '../../contexts/FavouriteContext';
@@ -22,7 +22,9 @@ const testMovie = new Movie(
     9.5
 );
 
-const movieCardRender = () => {
+
+beforeEach(() => {
+    localStorage.clear();
     render(
         <FavouriteProvider>
             <WatchLaterProvider>
@@ -30,45 +32,67 @@ const movieCardRender = () => {
             </WatchLaterProvider>
         </FavouriteProvider>
     )
-}
+})
 
 test('renders movie title', () => {
-    movieCardRender();
     const movieTitle = screen.getByText(testMovie.title);
     expect(movieTitle).toBeVisible();
 });
 
 test('renders movie poster', () => {
-    movieCardRender();
     const moviePoster = screen.getByAltText('movie poster');
     expect(moviePoster).toBeVisible();
     expect(moviePoster.src).toBe('https://image.tmdb.org/t/p/w500/posterPath.jpg');
 })
 
 test('renders movie rating', () => {
-    movieCardRender();
     const movieRating = screen.getByText(testMovie.voteAverage.toString());
     expect(movieRating).toBeVisible();
 })
 
 test('renders movie release year', () => {
-    movieCardRender();
     const movieReleaseYear = screen.getByText(testMovie.releaseDate.getFullYear().toString());
     expect(movieReleaseYear).toBeVisible();
 })
 
-test('clicking on watch later button when movie is in watch later lists removes it from list', () => {})
+test('After clicking favourites icon, favourites icon should have active class set', () => {
+    const favouriteIcon = screen.getByTestId('favourite-icon');
+    fireEvent.click(favouriteIcon);
+    expect(favouriteIcon).toBeVisible();
+    expect(favouriteIcon).toHaveClass('Active');
+});
 
-test('clicking on watch later button when movie is not in watch later lists adds it to list', () => {})
+test('if movie is not in favourites, favourites icon should not have active class set', () => {
+    const favouriteIcon = screen.getByTestId('favourite-icon');
+    expect(favouriteIcon).toBeVisible();
+    expect(favouriteIcon).not.toHaveClass('Active');
+});
 
-test('clicking on favourites button when movie is in favourites lists removes it from list', () => {})
+test('After clicking favourites icon twice, favourites icon should not have active class set', () => {
+    const favouriteIcon = screen.getByTestId('favourite-icon');
+    fireEvent.click(favouriteIcon);
+    fireEvent.click(favouriteIcon);
+    expect(favouriteIcon).toBeVisible();
+    expect(favouriteIcon).not.toHaveClass('Active');
+});
 
-test('clicking on favourites button when movie is not in favourites lists adds it to list', () => {})
+test('After clicking watch later icon, watch later icon should have active class set', () => {
+    const watchLaterIcon = screen.getByTestId('watch-later-icon');
+    fireEvent.click(watchLaterIcon);
+    expect(watchLaterIcon).toBeVisible();
+    expect(watchLaterIcon).toHaveClass('Active');
+});
 
-test('if movie is in favourites, favourites icon should have active class set', () => {});
+test('if movie is not in watch later, watch later icon should not have active class set', () => {
+    const watchLaterIcon = screen.getByTestId('watch-later-icon');
+    expect(watchLaterIcon).toBeVisible();
+    expect(watchLaterIcon).not.toHaveClass('Active');
+});
 
-test('if movie is not in favourites, favourites icon should not have active class set', () => {});
-
-test('if movie is in watch later, watch later icon should be correct icon', () => {});
-
-test('if movie is not in watch later, watch later icon should be correct icon', () => {});
+test('After clicking watch later icon twice, watch later icon should not have active class set', () => {
+    const watchLaterIcon = screen.getByTestId('watch-later-icon');
+    fireEvent.click(watchLaterIcon);
+    fireEvent.click(watchLaterIcon);
+    expect(watchLaterIcon).toBeVisible();
+    expect(watchLaterIcon).not.toHaveClass('Active');
+});
