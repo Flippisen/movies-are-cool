@@ -35,7 +35,6 @@ export default () => {
             );
             const response = await results.json();
             setNumPages(response['total_pages']);
-            console.log(response['total_results']);
             setTotalResults(response['total_results']);
             const newResults = response['results'].map((result: any) => new Movie(
                 result.poster_path,
