@@ -17,13 +17,16 @@ export default () => {
     const debouncedSearchTerm = useDebounce<string>(searchTerm, 150);
 
     useEffect(() => {
+        setSearchResults([]);
+        setNumPages(1);
+        setTotalResults(0);
+    }, [searchTerm])
+
+    useEffect(() => {
+        if (debouncedSearchTerm === '') {
+            return;
+        }
         const getSearchResults = async () => {
-            if (debouncedSearchTerm === '') {
-                setSearchResults([]);
-                setNumPages(1);
-                setTotalResults(0);
-                return;
-            }
             const results = await fetch(
                 apiUrl('/search/movie', { query: debouncedSearchTerm, page: page}),
                 {
