@@ -22,24 +22,40 @@ const testMovie = new Movie(
     9.5
 );
 
-test('renders movie title', () => {
-    const { getByText } = render(
+const movieCardRender = () => {
+    render(
         <FavouriteProvider>
             <WatchLaterProvider>
                 <MovieCard movie={testMovie}></MovieCard>
             </WatchLaterProvider>
         </FavouriteProvider>
     )
+}
+
+test('renders movie title', () => {
+    movieCardRender();
     const movieTitle = screen.getByText(testMovie.title);
-    console.log(movieTitle);
-    expect(movieTitle).toBeInTheDocument();
+    expect(movieTitle).toBeVisible();
 });
 
-test('renders movie poster', () => {})
+test('renders movie poster', () => {
+    movieCardRender();
+    const moviePoster = screen.getByAltText('movie poster');
+    expect(moviePoster).toBeVisible();
+    expect(moviePoster.src).toBe('https://image.tmdb.org/t/p/w500/posterPath.jpg');
+})
 
-test('renders movie rating', () => {})
+test('renders movie rating', () => {
+    movieCardRender();
+    const movieRating = screen.getByText(testMovie.voteAverage.toString());
+    expect(movieRating).toBeVisible();
+})
 
-test('renders movie release year', () => {})
+test('renders movie release year', () => {
+    movieCardRender();
+    const movieReleaseYear = screen.getByText(testMovie.releaseDate.getFullYear().toString());
+    expect(movieReleaseYear).toBeVisible();
+})
 
 test('clicking on watch later button when movie is in watch later lists removes it from list', () => {})
 

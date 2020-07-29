@@ -65,7 +65,7 @@ export default (props: Props) => {
                 <div className='Poster'>
                     {
                         movie.posterPath ?
-                        <img src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`} /> :
+                        <img src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`} alt='movie poster'/> :
                         <BrokenImageIcon></BrokenImageIcon>
                     }
                 </div>
