@@ -18,7 +18,6 @@ export default () => {
 
     useEffect(() => {
         const getSearchResults = async () => {
-            setPage(1);
             if (debouncedSearchTerm === '') {
                 setSearchResults([]);
                 setNumPages(1);
@@ -35,7 +34,7 @@ export default () => {
             setNumPages(response['total_pages']);
             console.log(response['total_results']);
             setTotalResults(response['total_results']);
-            setSearchResults(response['results'].map((result: any) => new Movie(
+            const newResults = response['results'].map((result: any) => new Movie(
                 result.poster_path,
                 result.adult,
                 result.overview,
@@ -50,7 +49,8 @@ export default () => {
                 result.vote_count,
                 result.video,
                 result.vote_average
-            )));
+            ))
+            setSearchResults([...searchResults, ...newResults]);
             setIsLoading(false);
         }
         getSearchResults();
