@@ -63,7 +63,7 @@ export default () => {
             {
                 totalResults > 0 && totalResults !== searchResults.length &&
                 <div className='ButtonContainer'>
-                    <div className='Button LoadMore'>
+                    <div className='Button LoadMore' onClick={e => setPage(page + 1)}>
                         Load more
                     </div>
                 </div>
