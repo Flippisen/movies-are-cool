@@ -5,6 +5,7 @@ import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import FavouriteIcon from '@material-ui/icons/Favorite';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import PlaylistAddedIcon from '@material-ui/icons/PlaylistAddCheck';
 import { useFavouriteState } from '../../contexts/FavouriteContext';
 import { useWatchLaterState } from '../../contexts/WatchLaterContext';
 
@@ -87,7 +88,10 @@ export default (props: Props) => {
                             <FavouriteIcon className='FavouriteIcon'></FavouriteIcon>
                         </div>
                         <div className={isOnWatchLater ? 'Active' : ''} onClick={e => addWatchLater(movie.id)}>
-                            <PlaylistAddIcon className='PlaylistAddIcon'></PlaylistAddIcon>
+                            { !isOnWatchLater ? 
+                                <PlaylistAddIcon className='PlaylistAddIcon'></PlaylistAddIcon> :
+                                <PlaylistAddedIcon className='PlaylistAddIcon'></PlaylistAddedIcon>
+                            }
                         </div>
                     </div>
                 </div>
