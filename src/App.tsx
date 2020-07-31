@@ -10,11 +10,11 @@ import { WatchLaterProvider } from './contexts/WatchLaterContext';
 function App() {
   return (
     <Router>
-      <NavBar></NavBar>
+      <NavBar data-testid='navbar'></NavBar>
       <SearchProvider>
         <FavouriteProvider>
           <WatchLaterProvider>
-            <div className='App'>
+            <div className='App' data-testid='app-element'>
               <Switch>
                 <Route exact path='/'>
                     <SearchPage></SearchPage>
