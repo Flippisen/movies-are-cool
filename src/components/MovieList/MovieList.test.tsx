@@ -38,8 +38,7 @@ test('If movies are passed to the movie list component then it should have movie
 })
 
 test('If no movies are passed to the movie list componet, no movie cards should be shown', () => {
-    const movieList = [
-    ]
+    const movieList: Movie[] = []
 
     render(
         <FavouriteProvider>
