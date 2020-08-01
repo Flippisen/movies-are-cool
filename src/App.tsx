@@ -12,7 +12,7 @@ import WatchLaterPage from './components/WatchLaterPage/WatchLaterPage';
 function App() {
   return (
     <Router>
-      <NavBar data-testid='navbar'></NavBar>
+      <NavBar></NavBar>
       <SearchProvider>
         <FavouriteProvider>
           <WatchLaterProvider>
