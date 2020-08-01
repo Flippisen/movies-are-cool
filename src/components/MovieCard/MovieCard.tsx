@@ -66,7 +66,7 @@ export default (props: Props) => {
     }
 
     return (
-        <div className='CardContainer'>
+        <div className='CardContainer' data-testid='MovieCard'>
             <div className='Card'>
                 <div className='Poster'>
                     {
