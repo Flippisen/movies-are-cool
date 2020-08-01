@@ -11,25 +11,25 @@ function App() {
   return (
     <Router>
       <NavBar data-testid='navbar'></NavBar>
-      <SearchProvider>
-        <FavouriteProvider>
-          <WatchLaterProvider>
-            <div className='App' data-testid='app-element'>
-              <Switch>
+      <FavouriteProvider>
+        <WatchLaterProvider>
+          <div className='App' data-testid='app-element'>
+            <Switch>
+              <SearchProvider>
                 <Route exact path='/'>
-                    <SearchPage></SearchPage>
+                  <SearchPage></SearchPage>
                 </Route>
-                <Route path='/favourites'>
-                  <div>Not Implemented</div>
-                </Route>
-                <Route path='/watch-later'>
-                  <div>Not Implemented</div>
-                </Route>
-              </Switch>
-            </div>
-          </WatchLaterProvider>
-        </FavouriteProvider>
-      </SearchProvider>
+              </SearchProvider>
+              <Route path='/favourites'>
+                <div>Not Implemented</div>
+              </Route>
+              <Route path='/watch-later'>
+                <div>Not Implemented</div>
+              </Route>
+            </Switch>
+          </div>
+        </WatchLaterProvider>
+      </FavouriteProvider>
     </Router>
   );
 }

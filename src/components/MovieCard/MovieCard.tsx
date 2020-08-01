@@ -20,13 +20,19 @@ export default (props: Props) => {
     const [isOnWatchLater, setIsOnWatchLater] = useState(false);
     const movie = props.movie;
 
+    const isMovieInList = (list: Movie[], movie: Movie) => {
+        return !!list.find((x) => x.id === movie.id);
+    }
+
     useEffect(() => {
-        setIsFavourite(favourites.includes(movie.id));
-        setIsOnWatchLater(watchLaterList.includes(movie.id));
+        const isInFavouritesList = isMovieInList(favourites, movie);
+        const isInWatchLaterList = isMovieInList(watchLaterList, movie);
+        setIsFavourite(isInFavouritesList);
+        setIsOnWatchLater(isInWatchLaterList);
     }, [favourites, watchLaterList, movie.id]);
     
-    const removeFavourite = (id: number) => {
-        const idIndex = favourites.findIndex((item) => item === id);
+    const removeFavourite = (movie: Movie) => {
+        const idIndex = favourites.findIndex((item) => item.id === movie.id);
         if (idIndex < 0) {
             return;
         }
@@ -34,8 +40,8 @@ export default (props: Props) => {
         setFavourites([...favourites]);
     }
 
-    const removeWatchLater = (id: number) => {
-        const idIndex = watchLaterList.findIndex((item) => item === id);
+    const removeWatchLater = (movie: Movie) => {
+        const idIndex = watchLaterList.findIndex((item) => item.id === movie.id);
         if (idIndex < 0) {
             return;
         }
@@ -43,15 +49,15 @@ export default (props: Props) => {
         setWatchLaterList([...watchLaterList]);
     }
 
-    const addFavourite = (id: number) => {
-        if (favourites.includes(id)) {
-            removeFavourite(id);
+    const addFavourite = (movie: Movie) => {
+        if (isMovieInList(favourites, movie)) {
+            removeFavourite(movie);
             return;
         }
-        setFavourites([...favourites, id]);
+        setFavourites([...favourites, movie]);
     }
 
-    const addWatchLater = (id: number) => {
+    const addWatchLater = (id: Movie) => {
         if (watchLaterList.includes(id)) {
             removeWatchLater(id);
             return;
@@ -83,10 +89,10 @@ export default (props: Props) => {
                         </div>
                     </div>
                     <div className='ActionItems'>
-                        <div className={isFavourite ? 'Active' : ''} onClick={e => addFavourite(movie.id)} data-testid='favourite-icon'>
+                        <div className={isFavourite ? 'Active' : ''} onClick={e => addFavourite(movie)} data-testid='favourite-icon'>
                             <FavouriteIcon className='FavouriteIcon'></FavouriteIcon>
                         </div>
-                        <div className={isOnWatchLater ? 'Active' : ''} onClick={e => addWatchLater(movie.id)} data-testid='watch-later-icon'>
+                        <div className={isOnWatchLater ? 'Active' : ''} onClick={e => addWatchLater(movie)} data-testid='watch-later-icon'>
                             { !isOnWatchLater ? 
                                 <PlaylistAddIcon className='PlaylistAddIcon'></PlaylistAddIcon> :
                                 <PlaylistAddedIcon className='PlaylistAddIcon'></PlaylistAddedIcon>

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
 import React from 'react'
+import { Movie } from '../models/movie';
 
 type State = {
-    watchLaterList: number[];
-    setWatchLaterList: React.Dispatch<React.SetStateAction<number[]>>;
+    watchLaterList: Movie[];
+    setWatchLaterList: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
 type WatchLaterProviderProps = {children: React.ReactNode}
@@ -15,7 +16,7 @@ const localStorageKey = 'watchLaterList';
 
 export const WatchLaterProvider = ({children}: WatchLaterProviderProps) => {
     const startValue = localStorage.getItem(localStorageKey);
-    const [watchLaterList, setWatchLaterList] = useState<number[]>(startValue ? JSON.parse(startValue) : []);
+    const [watchLaterList, setWatchLaterList] = useState<Movie[]>(startValue ? JSON.parse(startValue) : []);
 
     useEffect(() => {
         localStorage.setItem(localStorageKey, JSON.stringify(watchLaterList));
