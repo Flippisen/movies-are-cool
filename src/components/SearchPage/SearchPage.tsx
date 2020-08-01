@@ -65,7 +65,7 @@ export default () => {
     const searchResultsDiv = () => {
         return (
             <div>
-                <MovieList></MovieList>
+                <MovieList movies={searchResults}></MovieList>
                 { 
                     totalResults > 0 && totalResults !== searchResults.length &&
                     <div className='ButtonContainer'>
