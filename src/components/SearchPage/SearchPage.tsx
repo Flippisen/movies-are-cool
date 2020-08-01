@@ -59,7 +59,7 @@ export default () => {
     }, [page, debouncedSearchTerm]);
 
     const loadingDiv = () => {
-        return <div className='loading'>Loading...</div>
+        return <div className='Loading'>Loading...</div>
     }
 
     const searchResultsDiv = () => {
