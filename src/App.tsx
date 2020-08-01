@@ -7,6 +7,7 @@ import { SearchProvider } from './contexts/SearchContext';
 import { FavouriteProvider } from './contexts/FavouriteContext';
 import { WatchLaterProvider } from './contexts/WatchLaterContext';
 import FavouritesPage from './components/FavouritesPage/FavouritesPage';
+import WatchLaterPage from './components/WatchLaterPage/WatchLaterPage';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
                   <FavouritesPage></FavouritesPage>
                 </Route>
                 <Route path='/watch-later'>
-                  <div>Not Implemented</div>
+                  <WatchLaterPage></WatchLaterPage>
                 </Route>
               </Switch>
             </div>
