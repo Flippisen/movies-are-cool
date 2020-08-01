@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSearchState } from '../../../contexts/SearchContext';
-import MovieCard from '../../MovieCard/MovieCard';
+import { useSearchState } from '../../contexts/SearchContext';
+import MovieCard from '../MovieCard/MovieCard';
 import './SearchResults.scss';
 
 export default () => {
