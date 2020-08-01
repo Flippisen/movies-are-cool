@@ -5,7 +5,7 @@ import SearchBar from './SearchBar/SearchBar';
 import { useDebounce } from '../../hooks/useDebounce';
 import './SearchPage.scss';
 import { Movie } from '../../models/movie';
-import SearchResults from '../MovieList/SearchResults';
+import MovieList from '../MovieList/MovieList';
 
 export default () => {
     const [page, setPage] = useState(1);
@@ -65,7 +65,7 @@ export default () => {
     const searchResultsDiv = () => {
         return (
             <div>
-                <SearchResults></SearchResults>
+                <MovieList></MovieList>
                 { 
                     totalResults > 0 && totalResults !== searchResults.length &&
                     <div className='ButtonContainer'>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSearchState } from '../../contexts/SearchContext';
 import MovieCard from '../MovieCard/MovieCard';
-import './SearchResults.scss';
+import './MovieList.scss';
 
 export default () => {
     const { searchResults } = useSearchState();
