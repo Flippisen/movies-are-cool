@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSearchState } from '../../contexts/SearchContext';
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieList.scss';
 import { Movie } from '../../models/movie';

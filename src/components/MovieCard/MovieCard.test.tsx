@@ -40,7 +40,7 @@ test('renders movie title', () => {
 });
 
 test('renders movie poster', () => {
-    const moviePoster = screen.getByAltText('movie poster');
+    const moviePoster = screen.getByAltText('movie poster') as HTMLImageElement;
     expect(moviePoster).toBeVisible();
     expect(moviePoster.src).toBe('https://image.tmdb.org/t/p/w500/posterPath.jpg');
 })

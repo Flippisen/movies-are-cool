@@ -6,30 +6,31 @@ import SearchPage from './components/SearchPage/SearchPage';
 import { SearchProvider } from './contexts/SearchContext';
 import { FavouriteProvider } from './contexts/FavouriteContext';
 import { WatchLaterProvider } from './contexts/WatchLaterContext';
+import FavouritesPage from './components/FavouritesPage/FavouritesPage';
 
 function App() {
   return (
     <Router>
       <NavBar data-testid='navbar'></NavBar>
-      <FavouriteProvider>
-        <WatchLaterProvider>
-          <div className='App' data-testid='app-element'>
-            <Switch>
-              <SearchProvider>
+      <SearchProvider>
+        <FavouriteProvider>
+          <WatchLaterProvider>
+            <div className='App' data-testid='app-element'>
+              <Switch>
                 <Route exact path='/'>
                   <SearchPage></SearchPage>
                 </Route>
-              </SearchProvider>
-              <Route path='/favourites'>
-                <div>Not Implemented</div>
-              </Route>
-              <Route path='/watch-later'>
-                <div>Not Implemented</div>
-              </Route>
-            </Switch>
-          </div>
-        </WatchLaterProvider>
-      </FavouriteProvider>
+                <Route path='/favourites'>
+                  <FavouritesPage></FavouritesPage>
+                </Route>
+                <Route path='/watch-later'>
+                  <div>Not Implemented</div>
+                </Route>
+              </Switch>
+            </div>
+          </WatchLaterProvider>
+        </FavouriteProvider>
+      </SearchProvider>
     </Router>
   );
 }

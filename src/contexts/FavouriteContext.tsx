@@ -16,8 +16,29 @@ const localStorageKey = 'favourites';
 
 export const FavouriteProvider = ({children}: FavouriteProviderProps) => {
     // This could be improved by setting it using movie db api instead
-    const startValue = localStorage.getItem(localStorageKey);
-    const [favourites, setFavourites] = useState<Movie[]>(startValue ? JSON.parse(startValue) : []);
+    let localStorageValue = localStorage.getItem(localStorageKey);
+    let startValue: Movie[] = [];
+    if (localStorageValue) {
+        const movieList = JSON.parse(localStorageValue);
+
+        startValue = movieList.map((x: any) => new Movie(
+            x.poster_path,
+            x.adult,
+            x.overview,
+            x.release_date,
+            x.genre_ids,
+            x.id,
+            x.original_title,
+            x.original_language,
+            x.title,
+            x.backdrop_path,
+            x.popularity,
+            x.vote_count,
+            x.video,
+            x.vote_average
+        ))
+    }
+    const [favourites, setFavourites] = useState<Movie[]>(startValue || []);
 
     useEffect(() => {
         localStorage.setItem(localStorageKey, JSON.stringify(favourites));

@@ -29,7 +29,7 @@ export default (props: Props) => {
         const isInWatchLaterList = isMovieInList(watchLaterList, movie);
         setIsFavourite(isInFavouritesList);
         setIsOnWatchLater(isInWatchLaterList);
-    }, [favourites, watchLaterList, movie.id]);
+    }, [favourites, watchLaterList, movie]);
     
     const removeFavourite = (movie: Movie) => {
         const idIndex = favourites.findIndex((item) => item.id === movie.id);
