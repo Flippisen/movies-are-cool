@@ -8,6 +8,7 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import PlaylistAddedIcon from '@material-ui/icons/PlaylistAddCheck';
 import { useFavouriteState } from '../../contexts/FavouriteContext';
 import { useWatchLaterState } from '../../contexts/WatchLaterContext';
+import { Link } from 'react-router-dom';
 
 type Props = {
     movie: Movie
@@ -66,8 +67,8 @@ export default (props: Props) => {
     }
 
     return (
-        <div className='CardContainer' data-testid='MovieCard'>
-            <div className='Card'>
+        <div className='CardContainer' data-testid='MovieCard' >
+            <Link className='Card' to={`/movie/${movie.id}`}>
                 <div className='Poster'>
                     {
                         movie.backdropPath ?
@@ -100,7 +101,7 @@ export default (props: Props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         </div>
     )
 }

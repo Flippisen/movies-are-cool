@@ -54,16 +54,18 @@ export default () => {
         getMovieById();
     }, [id])
 
-    return <div>
+    return <div className='MovieDetails'>
         <div className='BackButtonContainer'>
             <div onClick={e => window.history.back()}>
                 <ArrowBackIcon></ArrowBackIcon>
             </div>
         </div>
         <div className='Container'>
-            <div className='Card'>
-                Movie details
-            </div>
+            { result &&
+                <div className='Card'>
+                    <div className='Title'>{result.title}</div>
+                </div>
+            }
         </div>
     </div>
 }
