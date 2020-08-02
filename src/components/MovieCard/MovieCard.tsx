@@ -68,7 +68,7 @@ export default (props: Props) => {
 
     return (
         <div className='CardContainer' data-testid='MovieCard' >
-            <Link className='Card' to={`/movie/${movie.id}`}>
+            <Link className='Card' to={`/movies/${movie.id}`}>
                 <div className='Poster'>
                     {
                         movie.backdropPath ?
