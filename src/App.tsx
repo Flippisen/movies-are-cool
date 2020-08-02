@@ -8,6 +8,7 @@ import { FavouriteProvider } from './contexts/FavouriteContext';
 import { WatchLaterProvider } from './contexts/WatchLaterContext';
 import FavouritesPage from './components/FavouritesPage/FavouritesPage';
 import WatchLaterPage from './components/WatchLaterPage/WatchLaterPage';
+import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
                 </Route>
                 <Route path='/watch-later'>
                   <WatchLaterPage></WatchLaterPage>
+                </Route>
+                <Route path='/movies/:id'>
+                  <MovieDetailsPage></MovieDetailsPage>
                 </Route>
               </Switch>
             </div>
