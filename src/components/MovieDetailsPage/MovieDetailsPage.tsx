@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Movie, MovieDetails } from '../../models/movie';
 import { apiUrl } from '../../services/api';
+import './MovieDetailsPage.scss';
 
 export default () => {
     const [result, setResult] = useState<Movie | undefined>(undefined);
@@ -52,7 +53,9 @@ export default () => {
         getMovieById();
     }, [id])
 
-    return <div className='Card'>
-        Movie details
+    return <div className='Container'>
+        <div className='Card'>
+            Movie details
+        </div>
     </div>
 }
