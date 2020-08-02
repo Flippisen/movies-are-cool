@@ -25,4 +25,42 @@
     .BackButtonLink {
         cursor: pointer;
     }
+
+    .Tagline {
+        color: #777777;
+        font-style: italic;
+    }
+
+    .Details {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-top: $padding-medium;
+        justify-content: center;
+    }
+
+    .Poster {
+        width: 200px;
+        overflow-y: visible;
+    }
+
+    .TextDetails {
+        padding: 0 $padding-small;
+        .Detail {
+            width: 100%;
+            text-align: start;
+            padding-bottom: $padding-small;
+            display: flex;
+        }
+
+        .DetailLabel {
+            font-weight: bold;
+            padding-right: $padding-small;
+        }
+
+        .DetailValue {
+            .NegativeProfit {
+                color: red;
+            }
+        }
+    }
 }

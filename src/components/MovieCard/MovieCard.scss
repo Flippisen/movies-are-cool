@@ -1,94 +1,96 @@
 @import 'public/variables.scss';
 
-.CardContainer{
-    flex: 0 0 20%;
-    min-height: 300px;
-    padding: $padding-small;
-    overflow: hidden;
+.MovieCard {
+    .CardContainer{
+        flex: 0 0 20%;
+        min-height: 300px;
+        padding: $padding-small;
+        overflow: hidden;
 
-    @media only screen and (max-width: $mobile-breakpoint) {
-        flex: 0 0 100%;
+        @media only screen and (max-width: $mobile-breakpoint) {
+            flex: 0 0 100%;
+        }
     }
-}
 
-.Card {
-    width: 100%;
-    height: 100%;
-    background-color: $off-background-colour;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    box-shadow: 0 0px 8px 4px rgba(#000000, 0.35);
-    color: unset;
-    text-decoration: unset;
-}
-
-.Poster {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-
-    img {
+    .Card {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        background-color: $off-background-colour;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        box-shadow: 0 0px 8px 4px rgba(#000000, 0.35);
+        color: unset;
+        text-decoration: unset;
     }
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.Details {
-    min-height: 100px;
-    padding: $padding-medium;
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1 1 auto;
-    flex-direction: column;
-}
+    .Poster {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
 
-.MovieTitle {
-    font-weight: bold;
-    font-size: 18px;
-    width: 100%;
-    flex: 1 1 auto;
-}
-
-.MinorDetails {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    align-items: flex-end;
-    width: 100%;
-    height: 24px;
-}
-
-.Rating {
-    display: flex;
-    align-items: center;
-}
-
-.ActionItems {
-    padding-top: $padding-medium;
-    display: flex;
-    justify-content: space-between;
-
-    * {
-        cursor: pointer;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-}
 
-.FavouriteIcon {
-    &:hover,
-    .Active & {
-        fill: red;
+    .Details {
+        min-height: 100px;
+        padding: $padding-medium;
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1 1 auto;
+        flex-direction: column;
     }
-}
 
-.PlaylistAddIcon {
-    &:hover,
-    .Active & {
-        fill: $navbar-link-active;
+    .MovieTitle {
+        font-weight: bold;
+        font-size: 18px;
+        width: 100%;
+        flex: 1 1 auto;
+    }
+
+    .MinorDetails {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        align-items: flex-end;
+        width: 100%;
+        height: 24px;
+    }
+
+    .Rating {
+        display: flex;
+        align-items: center;
+    }
+
+    .ActionItems {
+        padding-top: $padding-medium;
+        display: flex;
+        justify-content: space-between;
+
+        * {
+            cursor: pointer;
+        }
+    }
+
+    .FavouriteIcon {
+        &:hover,
+        .Active & {
+            fill: red;
+        }
+    }
+
+    .PlaylistAddIcon {
+        &:hover,
+        .Active & {
+            fill: $navbar-link-active;
+        }
     }
 }

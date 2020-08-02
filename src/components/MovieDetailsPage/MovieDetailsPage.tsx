@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Movie, MovieDetails } from '../../models/movie';
 import { apiUrl } from '../../services/api';
 import './MovieDetailsPage.scss';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import format from 'date-fns/format';
 
 export default () => {
-    const [result, setResult] = useState<Movie | undefined>(undefined);
+    const [result, setResult] = useState<MovieDetails | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(false);
+    const [details, setDetails] = useState<{ [key: string]: JSX.Element}>({});
     const { id } = useParams();
 
     useEffect(() => {
@@ -49,7 +51,21 @@ export default () => {
             );
             setResult(movieResult);
             setIsLoading(false);
-            console.log(movieResult);
+            const profit = movieResult.budget - movieResult.revenue;
+            setDetails({
+                Overview: <div>{movieResult.overview}</div>,
+                Budget: <div>${movieResult.budget.toLocaleString()}</div>,
+                Revenue: <div>${movieResult.revenue.toLocaleString()}</div>,
+                Profit: <div className={profit < 0 ? 'NegativeProfit' : ''}>
+                    {
+                        profit < 0 ?
+                            '-' : ''
+                    }
+                    ${(Math.abs(profit)).toLocaleString()}
+                </div>,
+                Rating: <div>{`${movieResult.voteAverage} (${movieResult.voteCount.toLocaleString()})`}</div>,
+                Homepage: <a href={movieResult.homepage}>{movieResult.homepage}</a>
+            });
         }
         getMovieById();
     }, [id])
@@ -63,7 +79,31 @@ export default () => {
         <div className='Container'>
             { result &&
                 <div className='Card'>
-                    <div className='Title'>{result.title}</div>
+                    <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
+                    <div className='Tagline'>{result.tagline}</div>
+                    <div className='ImportantDetails'>
+                        { result.genres.map(x => x.name).join(', ')} | { result.runtime } minutes | {format(result.releaseDate, 'd LLLL yyyy')}
+                    </div>
+                    <div className='Details'>
+                        <div className='Poster'>
+                            <img src={`https://image.tmdb.org/t/p/w200/${result.posterPath}`} alt='movie poster' />
+                        </div>
+                        <div className='TextDetails'>
+                            {
+                                Object.keys(details).map(detail => {
+                                    return <div className='Detail'>
+                                        <div className='DetailLabel'>
+                                            {detail}
+                                        </div>
+                                        <div className='DetailValue'>
+                                            {details[detail]}
+                                        </div>
+                                    </div>
+                                })
+                            }
+
+                        </div>
+                    </div>
                 </div>
             }
         </div>
