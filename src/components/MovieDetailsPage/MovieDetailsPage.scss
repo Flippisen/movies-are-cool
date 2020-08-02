@@ -1,16 +1,24 @@
 @import 'public/variables.scss';
 
-.Container {
-    padding: $padding-medium;
-}
+.MovieDetails {
+    .Container {
+        padding: $padding-medium;
+    }
 
-.Card {
-    box-shadow: 0 0px 8px 4px rgba(#000000, 0.35);
-}
+    .Card {
+        box-shadow: 0 0px 8px 4px rgba(#000000, 0.35);
+        padding: $padding-small;
+    }
 
-.BackButtonContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: $padding-small $padding-medium;
+    .BackButtonContainer {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: $padding-small $padding-medium;
+    }
+
+    .Title {
+        font-size: 24px;
+        font-weight: bold;
+    }
 }
