@@ -1,0 +1,47 @@
+@import 'public/variables.scss';
+
+.NavBar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height: $navbar-height;
+    background-color: $off-background-colour;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+
+    @media only screen and (max-width: $mobile-breakpoint) {
+        bottom: 0;
+        top: unset;
+    }
+}
+
+.NavItem {
+    display: flex;
+    align-items: center;;
+    padding: 0 $padding-medium;
+    padding-left: $padding-small;
+    text-decoration: none;
+    color: $navbar-link;
+
+    &.active,
+    &:hover {
+        color: $navbar-link-active;
+    }
+
+    @media only screen and (max-width: $mobile-breakpoint) {
+        flex: 1 1 auto;
+        text-align: center;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        div {
+            width: 100%;
+        }
+    }
+
+    > div {
+        padding-left: $padding-small;
+    }
+}

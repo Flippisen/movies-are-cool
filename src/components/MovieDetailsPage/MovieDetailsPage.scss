@@ -1,0 +1,66 @@
+@import 'public/variables.scss';
+
+.MovieDetails {
+    .Container {
+        padding: $padding-medium;
+    }
+
+    .Card {
+        box-shadow: 0 0px 8px 4px rgba(#000000, 0.35);
+        padding: $padding-small;
+    }
+
+    .BackButtonContainer {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: $padding-small $padding-medium;
+    }
+
+    .Title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .BackButtonLink {
+        cursor: pointer;
+    }
+
+    .Tagline {
+        color: #777777;
+        font-style: italic;
+    }
+
+    .Details {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-top: $padding-medium;
+        justify-content: center;
+    }
+
+    .Poster {
+        width: 200px;
+        overflow-y: visible;
+    }
+
+    .TextDetails {
+        padding: 0 $padding-small;
+        .Detail {
+            width: 100%;
+            text-align: start;
+            padding-bottom: $padding-small;
+            display: flex;
+        }
+
+        .DetailLabel {
+            font-weight: bold;
+            padding-right: $padding-small;
+        }
+
+        .DetailValue {
+            .NegativeProfit {
+                color: red;
+            }
+        }
+    }
+}

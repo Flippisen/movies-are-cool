@@ -1,0 +1,12 @@
+@import 'public/variables.scss';
+
+.App {
+  text-align: center;
+  overflow: auto;
+  padding-top: $navbar-height;
+
+  @media only screen and (max-width: $mobile-breakpoint) {
+    padding-top: 0;
+    padding-bottom: $navbar-height;
+  }
+}
