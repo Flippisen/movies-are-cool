@@ -1,3 +1,17 @@
+## Future improvements
+
+* Changing favourites and watch later lists to use API provided by moviedb page instead of storing them in local storage for persistance, due to the downsides of using local storage
+* Add virtual scrolling to movie list pages to improve performance of those pages
+* Cache api results
+* Error handling
+* Add env local file to .gitignore to avoid having api keys in public github repo. Have not included it for now to provide ease of use for reviewer.
+* Add favourite and watch later button to movie details page
+* Evaluate Redux vs Context
+
+## Testing
+
+Unit tests have been done using jest and react testing library
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -42,17 +56,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-
-## Future improvements
-
-* Changing favourites and watch later lists to use API provided by moviedb page instead of storing them in local storage for persistance, due to the downsides of using local storage
-* Add virtual scrolling to movie list pages to improve performance of those pages
-* Cache api results
-* Error handling
-* Add env local file to .gitignore to avoid having api keys in public github repo. Have not included it for now to provide ease of use for reviewer.
-* Add favourite and watch later button to movie details page
-
-## Testing
-
-Unit tests have been done using jest and react testing library
