@@ -64,7 +64,8 @@ export default () => {
                     ${(Math.abs(profit)).toLocaleString()}
                 </div>,
                 Rating: <div>{`${movieResult.voteAverage} (${movieResult.voteCount.toLocaleString()})`}</div>,
-                Homepage: <a href={movieResult.homepage}>{movieResult.homepage}</a>
+                Homepage: <a href={movieResult.homepage}>{movieResult.homepage}</a>,
+                Status: <div>{movieResult.status}</div>
             });
         }
         getMovieById();
@@ -93,7 +94,7 @@ export default () => {
                                 Object.keys(details).map(detail => {
                                     return <div className='Detail'>
                                         <div className='DetailLabel'>
-                                            {detail}
+                                            {detail}:
                                         </div>
                                         <div className='DetailValue'>
                                             {details[detail]}
