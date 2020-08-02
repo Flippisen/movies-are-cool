@@ -45,23 +45,22 @@ export default () => {
                 response.production_companies,
                 response.revenue,
                 response.runtime,
-                response.spokenLanguage,
+                response.spoken_language,
                 response.status,
                 response.tagline
             );
             setResult(movieResult);
             setIsLoading(false);
-            const profit = movieResult.budget - movieResult.revenue;
+            const profit = movieResult.revenue - movieResult.budget;
             setDetails({
                 Overview: <div>{movieResult.overview}</div>,
-                Budget: <div>${movieResult.budget.toLocaleString()}</div>,
-                Revenue: <div>${movieResult.revenue.toLocaleString()}</div>,
+                Budget: <div>{`$${movieResult.budget.toLocaleString()}`}</div>,
+                Revenue: <div>{`$${movieResult.revenue.toLocaleString()}`}</div>,
                 Profit: <div className={profit < 0 ? 'NegativeProfit' : ''}>
                     {
                         profit < 0 ?
-                            '-' : ''
+                            `-$${(Math.abs(profit)).toLocaleString()}` : `$${(Math.abs(profit)).toLocaleString()}`
                     }
-                    ${(Math.abs(profit)).toLocaleString()}
                 </div>,
                 Rating: <div>{`${movieResult.voteAverage} (${movieResult.voteCount.toLocaleString()})`}</div>,
                 Homepage: <a href={movieResult.homepage}>{movieResult.homepage}</a>,
@@ -92,7 +91,7 @@ export default () => {
                         <div className='TextDetails'>
                             {
                                 Object.keys(details).map(detail => {
-                                    return <div className='Detail'>
+                                    return <div className='Detail' key={detail}>
                                         <div className='DetailLabel'>
                                             {detail}:
                                         </div>
@@ -102,7 +101,6 @@ export default () => {
                                     </div>
                                 })
                             }
-
                         </div>
                     </div>
                 </div>

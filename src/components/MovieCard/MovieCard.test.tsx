@@ -42,10 +42,10 @@ test('renders movie title', () => {
     expect(movieTitle).toBeVisible();
 });
 
-test('renders movie poster', () => {
-    const moviePoster = screen.getByAltText('movie backdrop') as HTMLImageElement;
-    expect(moviePoster).toBeVisible();
-    expect(moviePoster.src).toBe('https://image.tmdb.org/t/p/w500/backdropPath.jpg');
+test('renders movie backdrop', () => {
+    const movieBackdrop = screen.getByAltText('movie backdrop') as HTMLImageElement;
+    expect(movieBackdrop).toBeVisible();
+    expect(movieBackdrop.src).toBe('https://image.tmdb.org/t/p/w500/backdropPath.jpg');
 })
 
 test('renders movie rating', () => {
