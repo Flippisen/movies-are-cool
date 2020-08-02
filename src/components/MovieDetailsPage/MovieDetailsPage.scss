@@ -1,0 +1,16 @@
+@import 'public/variables.scss';
+
+.Container {
+    padding: $padding-medium;
+}
+
+.Card {
+    box-shadow: 0 0px 8px 4px rgba(#000000, 0.35);
+}
+
+.BackButtonContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: $padding-small $padding-medium;
+}
