@@ -4,6 +4,7 @@ import { Movie } from '../../models/movie';
 import MovieCard from './MovieCard';
 import { FavouriteProvider } from '../../contexts/FavouriteContext';
 import { WatchLaterProvider } from '../../contexts/WatchLaterContext';
+import { MemoryRouter } from 'react-router-dom';
 
 const testMovie = new Movie(
     'posterPath.jpg',
@@ -26,11 +27,13 @@ const testMovie = new Movie(
 beforeEach(() => {
     localStorage.clear();
     render(
-        <FavouriteProvider>
-            <WatchLaterProvider>
-                <MovieCard movie={testMovie}></MovieCard>
-            </WatchLaterProvider>
-        </FavouriteProvider>
+        <MemoryRouter>
+            <FavouriteProvider>
+                <WatchLaterProvider>
+                    <MovieCard movie={testMovie}></MovieCard>
+                </WatchLaterProvider>
+            </FavouriteProvider>
+        </MemoryRouter>
     )
 })
 
@@ -40,9 +43,9 @@ test('renders movie title', () => {
 });
 
 test('renders movie poster', () => {
-    const moviePoster = screen.getByAltText('movie poster') as HTMLImageElement;
+    const moviePoster = screen.getByAltText('movie backdrop') as HTMLImageElement;
     expect(moviePoster).toBeVisible();
-    expect(moviePoster.src).toBe('https://image.tmdb.org/t/p/w500/posterPath.jpg');
+    expect(moviePoster.src).toBe('https://image.tmdb.org/t/p/w500/backdropPath.jpg');
 })
 
 test('renders movie rating', () => {
