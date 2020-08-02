@@ -46,3 +46,90 @@ export class Movie {
         this.voteAverage = voteAverage;
     }
 }
+
+export class MovieDetails extends Movie {
+    public belongsToCollection: any | undefined;
+    public budget: number;
+    public genres: Genre[];
+    public homepage: string;
+    public imdbId: string;
+    public productionCompanies: ProductionCompany[];
+    public revenue: number;
+    public runtime: string | undefined;
+    public spokenLanguage: SpokenLanguage[];
+    public status: string; // Enum
+    public tagline: string | undefined; 
+
+    constructor(
+        posterPath: string,
+        adult: boolean,
+        overview: string,
+        releaseDate: string,
+        genreIds: number[],
+        id: number,
+        originalTitle: string,
+        originalLanguage: string,
+        title: string,
+        backdropPath: string,
+        popularity: number,
+        voteCount: number,
+        video: boolean,
+        voteAverage: number,
+        belongsToCollection: any | undefined,
+        budget: number,
+        genres: Genre[],
+        homepage: string,
+        imdbId: string,
+        productionCompanies: ProductionCompany[],
+        revenue: number,
+        runtime: string | undefined,
+        spokenLanguage: SpokenLanguage[],
+        status: string,
+        tagline: string | undefined
+    ) {
+        super(
+            posterPath,
+            adult,
+            overview,
+            releaseDate,
+            genreIds,
+            id,
+            originalTitle,
+            originalLanguage,
+            title,
+            backdropPath,
+            popularity,
+            voteCount,
+            video,
+            voteAverage
+        );
+        this.belongsToCollection = belongsToCollection;
+        this.budget = budget;
+        this.genres = genres;
+        this.homepage = homepage;
+        this.imdbId = imdbId;
+        this.productionCompanies = productionCompanies;
+        this.revenue = revenue;
+        this.runtime = runtime;
+        this.spokenLanguage = spokenLanguage;
+        this.status = status;
+        this.tagline = tagline;
+    }
+}
+
+interface SpokenLanguage {
+    iso_639_1: string;
+    name: string;
+}
+
+interface ProductionCompany {
+    name: string;
+    id: string;
+    logoPath: string | undefined;
+    originCountry: string
+}
+
+interface Genre {
+    id: string;
+    name: string;
+}
