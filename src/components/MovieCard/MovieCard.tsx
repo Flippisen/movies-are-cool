@@ -70,8 +70,8 @@ export default (props: Props) => {
             <div className='Card'>
                 <div className='Poster'>
                     {
-                        movie.posterPath ?
-                        <img src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`} alt='movie poster'/> :
+                        movie.backdropPath ?
+                        <img src={`https://image.tmdb.org/t/p/w500/${movie.backdropPath}`} alt='movie backdrop'/> :
                         <BrokenImageIcon></BrokenImageIcon>
                     }
                 </div>
