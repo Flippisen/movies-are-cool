@@ -76,35 +76,39 @@ export default () => {
                 <ArrowBackIcon></ArrowBackIcon>
             </div>
         </div>
-        <div className='Container'>
-            { result &&
-                <div className='Card'>
-                    <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
-                    <div className='Tagline'>{result.tagline}</div>
-                    <div className='ImportantDetails'>
-                        { result.genres.map(x => x.name).join(', ')} | { result.runtime } minutes | {format(result.releaseDate, 'd LLLL yyyy')}
-                    </div>
-                    <div className='Details'>
-                        <div className='Poster'>
-                            <img src={`https://image.tmdb.org/t/p/w200/${result.posterPath}`} alt='movie poster' />
+        { !isLoading ? 
+            <div className='Container'>
+                { result &&
+                    <div className='Card'>
+                        <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
+                        <div className='Tagline'>{result.tagline}</div>
+                        <div className='ImportantDetails'>
+                            { result.genres.map(x => x.name).join(', ')} | { result.runtime } minutes | {format(result.releaseDate, 'd LLLL yyyy')}
                         </div>
-                        <div className='TextDetails'>
-                            {
-                                Object.keys(details).map(detail => {
-                                    return <div className='Detail' key={detail}>
-                                        <div className='DetailLabel'>
-                                            {detail}:
+                        <div className='Details'>
+                            <div className='Poster'>
+                                <img src={`https://image.tmdb.org/t/p/w200/${result.posterPath}`} alt='movie poster' />
+                            </div>
+                            <div className='TextDetails'>
+                                {
+                                    Object.keys(details).map(detail => {
+                                        return <div className='Detail' key={detail}>
+                                            <div className='DetailLabel'>
+                                                {detail}:
+                                            </div>
+                                            <div className='DetailValue'>
+                                                {details[detail]}
+                                            </div>
                                         </div>
-                                        <div className='DetailValue'>
-                                            {details[detail]}
-                                        </div>
-                                    </div>
-                                })
-                            }
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+            </div>
+            :
+            <div className='Loading'>Loading...</div>
+        }
     </div>
 }
