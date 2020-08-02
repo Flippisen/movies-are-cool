@@ -50,6 +50,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 * Add virtual scrolling to movie list pages to improve performance of those pages
 * Cache api results
 * Error handling
+* Add env local file to .gitignore to avoid having api keys in public github repo. Have not included it for now to provide ease of use for reviewer.
+* Add favourite and watch later button to movie details page
 
 ## Testing
 
