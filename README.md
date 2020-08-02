@@ -49,6 +49,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 * Changing favourites and watch later lists to use API provided by moviedb page instead of storing them in local storage for persistance, due to the downsides of using local storage
 * Add virtual scrolling to movie list pages to improve performance of those pages
 * Cache api results
+* Error handling
 
 ## Testing
 
