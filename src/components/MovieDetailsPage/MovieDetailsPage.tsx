@@ -56,7 +56,7 @@ export default () => {
 
     return <div className='MovieDetails'>
         <div className='BackButtonContainer'>
-            <div onClick={e => window.history.back()}>
+            <div onClick={e => window.history.back()} className='BackButtonLink'>
                 <ArrowBackIcon></ArrowBackIcon>
             </div>
         </div>
