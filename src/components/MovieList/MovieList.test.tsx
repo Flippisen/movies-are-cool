@@ -4,6 +4,7 @@ import { Movie } from '../../models/movie';
 import MovieList from './MovieList';
 import { FavouriteProvider } from '../../contexts/FavouriteContext';
 import { WatchLaterProvider } from '../../contexts/WatchLaterContext';
+import { MemoryRouter } from 'react-router-dom';
 
 test('If movies are passed to the movie list component then it should have movie cards displayed', () => {
     const movieList = [
@@ -26,11 +27,13 @@ test('If movies are passed to the movie list component then it should have movie
     ]
 
     render(
-        <FavouriteProvider>
-            <WatchLaterProvider>
-                <MovieList movies={movieList}></MovieList>
-            </WatchLaterProvider>
-        </FavouriteProvider>
+        <MemoryRouter>
+            <FavouriteProvider>
+                <WatchLaterProvider>
+                    <MovieList movies={movieList}></MovieList>
+                </WatchLaterProvider>
+            </FavouriteProvider>
+        </MemoryRouter>
     )
 
     const cards = screen.getAllByTestId('MovieCard');
