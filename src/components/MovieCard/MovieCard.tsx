@@ -58,12 +58,12 @@ export default (props: Props) => {
         setFavourites([...favourites, movie]);
     }
 
-    const addWatchLater = (id: Movie) => {
-        if (watchLaterList.includes(id)) {
-            removeWatchLater(id);
+    const addWatchLater = (movie: Movie) => {
+        if (isMovieInList(watchLaterList, movie)) {
+            removeWatchLater(movie);
             return;
         }
-        setWatchLaterList([...watchLaterList, id]);
+        setWatchLaterList([...watchLaterList, movie]);
     }
 
     return (
