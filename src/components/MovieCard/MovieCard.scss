@@ -80,17 +80,13 @@
         }
     }
 
-    .FavouriteIcon {
-        &:hover,
-        .Active & {
-            fill: red;
-        }
+    .Active .FavouriteIcon,
+    .FavouriteIcon:hover {
+        fill: red;
     }
 
-    .PlaylistAddIcon {
-        &:hover,
-        .Active & {
-            fill: $navbar-link-active;
-        }
+    .PlaylistAddIcon:hover,
+    .Active .PlaylistAddIcon {
+        fill: $navbar-link-active;
     }
 }

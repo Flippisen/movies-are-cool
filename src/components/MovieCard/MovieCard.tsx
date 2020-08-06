@@ -91,10 +91,10 @@ export default (props: Props) => {
                             </div>
                         </div>
                         <div className='ActionItems'>
-                            <div className={isFavourite ? 'Active' : ''} onClick={e => addFavourite(movie)} data-testid='favourite-icon'>
+                            <div className={isFavourite ? 'Active' : ''} onClick={e => {addFavourite(movie); e.preventDefault()}} data-testid='favourite-icon'>
                                 <FavouriteIcon className='FavouriteIcon'></FavouriteIcon>
                             </div>
-                            <div className={isOnWatchLater ? 'Active' : ''} onClick={e => addWatchLater(movie)} data-testid='watch-later-icon'>
+                            <div className={isOnWatchLater ? 'Active' : ''} onClick={e => { addWatchLater(movie); e.preventDefault()}} data-testid='watch-later-icon'>
                                 { !isOnWatchLater ? 
                                     <PlaylistAddIcon className='PlaylistAddIcon'></PlaylistAddIcon> :
                                     <PlaylistAddedIcon className='PlaylistAddIcon'></PlaylistAddedIcon>
