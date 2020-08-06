@@ -22,20 +22,20 @@ export const WatchLaterProvider = ({children}: WatchLaterProviderProps) => {
         const movieList = JSON.parse(localStorageValue);
 
         startValue = movieList.map((x: any) => new Movie(
-            x.poster_path,
+            x.posterPath,
             x.adult,
             x.overview,
-            x.release_date,
-            x.genre_ids,
+            x.releaseDate,
+            x.genreIds,
             x.id,
-            x.original_title,
-            x.original_language,
+            x.originalTitle,
+            x.originalLanguage,
             x.title,
-            x.backdrop_path,
+            x.backdropPath,
             x.popularity,
-            x.vote_count,
+            x.voteCount,
             x.video,
-            x.vote_average
+            x.voteAverage
         ))
     }
     const [watchLaterList, setWatchLaterList] = useState<Movie[]>(startValue || []);
