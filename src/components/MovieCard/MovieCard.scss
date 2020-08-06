@@ -1,15 +1,19 @@
 @import 'public/variables.scss';
 
 .MovieCard {
+    flex: 0 0 20%;
+
+    @media only screen and (max-width: $mobile-breakpoint) {
+        flex: 0 0 100%;
+    }
+
     .CardContainer{
-        flex: 0 0 20%;
+
         min-height: 300px;
         padding: $padding-small;
         overflow: hidden;
 
-        @media only screen and (max-width: $mobile-breakpoint) {
-            flex: 0 0 100%;
-        }
+
     }
 
     .Card {
@@ -80,17 +84,13 @@
         }
     }
 
-    .FavouriteIcon {
-        &:hover,
-        .Active & {
-            fill: red;
-        }
+    .Active .FavouriteIcon,
+    .FavouriteIcon:hover {
+        fill: red;
     }
 
-    .PlaylistAddIcon {
-        &:hover,
-        .Active & {
-            fill: $navbar-link-active;
-        }
+    .PlaylistAddIcon:hover,
+    .Active .PlaylistAddIcon {
+        fill: $navbar-link-active;
     }
 }
