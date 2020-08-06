@@ -4,6 +4,9 @@ export function useDebounce<T = unknown>(value: T, delay: number) {
     // State and setters for debounced value
     const [debouncedValue, setDebouncedValue] = useState(value);
     useEffect(() => {
+        if (debouncedValue === value) {
+            return;
+        }
         // Update debounced value after delay
         const handler = setTimeout(() => {
             setDebouncedValue(value);

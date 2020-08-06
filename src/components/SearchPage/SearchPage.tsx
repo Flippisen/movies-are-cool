@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { apiUrl } from '../../services/api';
 import { useSearchState } from '../../contexts/SearchContext';
 import SearchBar from './SearchBar/SearchBar';
@@ -14,6 +14,7 @@ export default () => {
     const [isLoading, setIsLoading] = useState(false);
     const { setSearchResults, searchTerm, searchResults } = useSearchState();
     const debouncedSearchTerm = useDebounce<string>(searchTerm, 150);
+    const isInitialMount = useRef(true);
 
     useEffect(() => {
         setSearchResults([]);
@@ -22,6 +23,11 @@ export default () => {
     }, [searchTerm])
 
     useEffect(() => {
+        if(isInitialMount.current) {
+            isInitialMount.current = false;
+            setSearchResults(searchResults);
+            return;
+        }
         if (debouncedSearchTerm === '') {
             return;
         }
