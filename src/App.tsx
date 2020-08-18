@@ -10,6 +10,7 @@ import FavouritesPage from './components/FavouritesPage/FavouritesPage';
 import WatchLaterPage from './components/WatchLaterPage/WatchLaterPage';
 import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage';
 import GenrePage from './components/GenrePage/GenrePage';
+import { GenreProvider } from './contexts/GenreContext';
 
 function App() {
   return (
@@ -33,7 +34,9 @@ function App() {
                   <MovieDetailsPage></MovieDetailsPage>
                 </Route>
                 <Route path='/genres'>
-                  <GenrePage></GenrePage>
+                  <GenreProvider>
+                    <GenrePage></GenrePage>
+                  </GenreProvider>
                 </Route>
               </Switch>
             </div>
