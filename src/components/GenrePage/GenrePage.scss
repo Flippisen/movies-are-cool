@@ -5,9 +5,17 @@
         width: 180px;
     }
 
-    .header-row {
+    .header-row,
+    .footer {
         padding: $padding-medium;
         display: flex;
+    }
+
+    .header-row {
         justify-content: flex-start;
+    }
+
+    .footer {
+        justify-content: center;
     }
 }

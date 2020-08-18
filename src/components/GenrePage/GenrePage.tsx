@@ -6,22 +6,26 @@ import { makeApiCall, ApiMethods } from '../../services/api';
 import { Movie } from '../../models/movie';
 import Loading from '../Loading/Loading';
 import MovieList from '../MovieList/MovieList';
+import Pagination from '../Pagination/Pagination';
 
 export default () => {
-    const { selectedGenres, movieResults, setMovieResults, currentPage, setCurrentPage } = useGenreState();
+    const { selectedGenres, movieResults, setMovieResults, currentPage, setCurrentPage, maxPages, setMaxPages } = useGenreState();
     const [isLoading, setIsLoading] = useState(false);
     
     const onSelectedGenreChangeGetNewResults = (selectedGenres: number[]) => {
         if (!selectedGenres || selectedGenres.length === 0) {
             setMovieResults([]);
             setCurrentPage(1);
+            setMaxPages(undefined)
             return;
         }
         const getListOfGenres = async () => {
             setIsLoading(true);
             const response = await makeApiCall('/discover/movie', ApiMethods.GET, { 'with_genres': selectedGenres.join(',')});
             const newResults = response['results'].map(Movie.fromResponse)
+            const maxPages = response['total_pages'];
             setMovieResults(newResults);
+            setMaxPages(maxPages);
             setIsLoading(false);
         }
         getListOfGenres();
@@ -29,7 +33,7 @@ export default () => {
 
     useEffect(() => {
         onSelectedGenreChangeGetNewResults(selectedGenres);
-    }, [selectedGenres]);
+    }, [selectedGenres, currentPage]);
 
     return <div className='genre-page'>
         <div className='header-row'>
@@ -40,6 +44,9 @@ export default () => {
                 <Loading></Loading> :
                 <MovieList movies={movieResults}></MovieList>
             }
+        </div>
+        <div className='footer'>
+            { maxPages && <Pagination currentPage={currentPage} maxPages={maxPages} setCurrentPage={setCurrentPage}></Pagination> }
         </div>
     </div>
 }
