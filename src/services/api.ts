@@ -20,7 +20,7 @@ export enum ApiMethods {
 
 export const makeApiCall = async <T = any>(route: string, method: ApiMethods, params?: { [key: string]: (string | number | boolean) }, signal?: AbortSignal): Promise<T> => {
     const results = await fetch(
-        apiUrl('/search/movie', params),
+        apiUrl(route, params),
         {
             method: 'GET',
             signal: signal
