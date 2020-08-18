@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { apiUrl } from '../../services/api';
+import { apiUrl, ApiMethods, makeApiCall } from '../../services/api';
 import { useSearchState } from '../../contexts/SearchContext';
 import SearchBar from './SearchBar/SearchBar';
 import { useDebounce } from '../../hooks/useDebounce';
@@ -22,14 +22,49 @@ export default () => {
         setTotalResults(0);
     }, [setSearchResults]);
 
+    const isFirstMount = () => {
+        return isInitialMount.current;
+    }
+
+    const mapResponseToMovieObjects = (result: any) => {
+        return new Movie(
+            result.poster_path,
+            result.adult,
+            result.overview,
+            result.release_date,
+            result.genre_ids,
+            result.id,
+            result.original_title,
+            result.original_language,
+            result.title,
+            result.backdrop_path,
+            result.popularity,
+            result.vote_count,
+            result.video,
+            result.vote_average
+        );
+    }
+
     useEffect(() => {
         resetSearchResults();
     }, [searchTerm, resetSearchResults])
 
     useEffect(() => {
-        if(isInitialMount.current) {
+        const loadCachedResults = () => {
             isInitialMount.current = false;
             setSearchResults(searchResults);
+        }
+
+        const setStateBasedOnResponse = (response: any) => {
+            setNumPages(response['total_pages']);
+            setTotalResults(response['total_results']);
+            const newResults = response['results'].map(mapResponseToMovieObjects)
+            setSearchResults([...searchResults, ...newResults]);
+            setIsLoading(false);
+        }
+
+        if (isFirstMount()) {
+            loadCachedResults();
             return;
         }
         if (debouncedSearchTerm === '') {
@@ -39,35 +74,9 @@ export default () => {
         let cancelled = false;
         const getSearchResults = async () => {
             setIsLoading(true);
-            const results = await fetch(
-                apiUrl('/search/movie', { query: debouncedSearchTerm, page: page}),
-                {
-                    method: 'GET',
-                    signal: abortController.signal
-                }
-            );
-            const response = await results.json();
+            const response = await makeApiCall('/search/movie', { query: debouncedSearchTerm, page: page }, ApiMethods.GET, abortController.signal);
             if (!cancelled) {
-                setNumPages(response['total_pages']);
-                setTotalResults(response['total_results']);
-                const newResults = response['results'].map((result: any) => new Movie(
-                    result.poster_path,
-                    result.adult,
-                    result.overview,
-                    result.release_date,
-                    result.genre_ids,
-                    result.id,
-                    result.original_title,
-                    result.original_language,
-                    result.title,
-                    result.backdrop_path,
-                    result.popularity,
-                    result.vote_count,
-                    result.video,
-                    result.vote_average
-                ))
-                setSearchResults([...searchResults, ...newResults]);
-                setIsLoading(false);
+                setStateBasedOnResponse(response);
             }
 
         }

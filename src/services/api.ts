@@ -10,3 +10,21 @@ export const apiUrl = (route: string, params?: { [key: string]: (string | number
     
     return `${baseUrl}&${paramsString}`;
 }
+
+export enum ApiMethods {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE'
+}
+
+export const makeApiCall = async <T = any>(route: string, params?: { [key: string]: (string | number | boolean) }, method: ApiMethods, signal?: AbortSignal): Promise<T> => {
+    const results = await fetch(
+        apiUrl('/search/movie', params),
+        {
+            method: 'GET',
+            signal: signal
+        }
+    );
+    return results.json();
+}
