@@ -1,0 +1,13 @@
+@import 'public/variables.scss';
+
+.genre-page {
+    #genre-dropdown {
+        width: 180px;
+    }
+
+    .header-row {
+        padding: $padding-medium;
+        display: flex;
+        justify-content: flex-start;
+    }
+}

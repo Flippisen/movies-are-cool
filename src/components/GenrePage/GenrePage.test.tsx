@@ -23,7 +23,7 @@ test('When genre list is updated, fetch request should be made', async () => {
     })
 
 
-    const genreDropdown = screen.getByPlaceholderText('Select genres...');
+    const genreDropdown = screen.getByTestId('genre-dropdown');
     fireEvent.click(genreDropdown);
     const firstGenreInDropdown = genreDropdown.firstChild;
     if (!firstGenreInDropdown) {
