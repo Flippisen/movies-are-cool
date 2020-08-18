@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import FavouriteIcon from '@material-ui/icons/Favorite';
 import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 export default () => {
     return (
@@ -19,6 +20,10 @@ export default () => {
             <NavLink to='/watch-later' className='NavItem'>
                 <PlaylistPlayIcon></PlaylistPlayIcon>
                 <div>Watch Later</div>
+            </NavLink>
+            <NavLink to='/genres' className='NavItem'>
+                <FilterListIcon></FilterListIcon>
+                <div>Genres</div>
             </NavLink>
         </div>
     )
