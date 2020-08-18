@@ -9,6 +9,7 @@ import { WatchLaterProvider } from './contexts/WatchLaterContext';
 import FavouritesPage from './components/FavouritesPage/FavouritesPage';
 import WatchLaterPage from './components/WatchLaterPage/WatchLaterPage';
 import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage';
+import GenrePage from './components/GenrePage/GenrePage';
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
                 </Route>
                 <Route path='/movies/:id'>
                   <MovieDetailsPage></MovieDetailsPage>
+                </Route>
+                <Route path='/genres'>
+                  <GenrePage></GenrePage>
                 </Route>
               </Switch>
             </div>
