@@ -74,7 +74,7 @@ export default () => {
         let cancelled = false;
         const getSearchResults = async () => {
             setIsLoading(true);
-            const response = await makeApiCall('/search/movie', { query: debouncedSearchTerm, page: page }, ApiMethods.GET, abortController.signal);
+            const response = await makeApiCall('/search/movie', ApiMethods.GET, { query: debouncedSearchTerm, page: page }, abortController.signal);
             if (!cancelled) {
                 setStateBasedOnResponse(response);
             }

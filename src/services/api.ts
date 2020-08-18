@@ -18,7 +18,7 @@ export enum ApiMethods {
     DELETE = 'DELETE'
 }
 
-export const makeApiCall = async <T = any>(route: string, params?: { [key: string]: (string | number | boolean) }, method: ApiMethods, signal?: AbortSignal): Promise<T> => {
+export const makeApiCall = async <T = any>(route: string, method: ApiMethods, params?: { [key: string]: (string | number | boolean) }, signal?: AbortSignal): Promise<T> => {
     const results = await fetch(
         apiUrl('/search/movie', params),
         {
