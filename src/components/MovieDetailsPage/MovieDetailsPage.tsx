@@ -12,6 +12,23 @@ export default () => {
     const [details, setDetails] = useState<{ [key: string]: JSX.Element}>({});
     const { id } = useParams();
 
+    const getMovieDetailSections = (movieDetails: MovieDetails) => {
+        return {
+            Overview: <div>{movieDetails.overview}</div>,
+            Budget: <div>{`$${movieDetails.budget.toLocaleString()}`}</div>,
+            Revenue: <div>{`$${movieDetails.revenue.toLocaleString()}`}</div>,
+            Profit: <div className={movieDetails.profit < 0 ? 'NegativeProfit' : ''}>
+                    {
+                        movieDetails.profit < 0 ?
+                            `-$${(Math.abs(movieDetails.profit)).toLocaleString()}` : `$${(Math.abs(movieDetails.profit)).toLocaleString()}`
+                    }
+                </div>,
+            Rating: <div>{`${movieDetails.voteAverage} (${movieDetails.voteCount.toLocaleString()})`}</div>,
+            Homepage: <a href={movieDetails.homepage}>{movieDetails.homepage}</a>,
+            Status: <div>{movieDetails.status}</div>
+        }
+    }
+
     useEffect(() => {
         const getMovieById = async () => {
             setIsLoading(true);
@@ -19,21 +36,7 @@ export default () => {
             const movieResult = MovieDetails.fromResponse(response);
             setResult(movieResult);
             setIsLoading(false);
-            const profit = movieResult.revenue - movieResult.budget;
-            setDetails({
-                Overview: <div>{movieResult.overview}</div>,
-                Budget: <div>{`$${movieResult.budget.toLocaleString()}`}</div>,
-                Revenue: <div>{`$${movieResult.revenue.toLocaleString()}`}</div>,
-                Profit: <div className={profit < 0 ? 'NegativeProfit' : ''}>
-                    {
-                        profit < 0 ?
-                            `-$${(Math.abs(profit)).toLocaleString()}` : `$${(Math.abs(profit)).toLocaleString()}`
-                    }
-                </div>,
-                Rating: <div>{`${movieResult.voteAverage} (${movieResult.voteCount.toLocaleString()})`}</div>,
-                Homepage: <a href={movieResult.homepage}>{movieResult.homepage}</a>,
-                Status: <div>{movieResult.status}</div>
-            });
+            setDetails(getMovieDetailSections(movieResult));
         }
         getMovieById();
     }, [id])

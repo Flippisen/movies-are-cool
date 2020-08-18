@@ -164,6 +164,10 @@ export class MovieDetails extends Movie {
             response.tagline
         );
     }
+
+    get profit() {
+        return this.revenue - this.budget;
+    }
 }
 
 interface SpokenLanguage {

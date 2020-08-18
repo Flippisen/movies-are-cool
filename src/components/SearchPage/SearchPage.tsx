@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { apiUrl, ApiMethods, makeApiCall } from '../../services/api';
+import { ApiMethods, makeApiCall } from '../../services/api';
 import { useSearchState } from '../../contexts/SearchContext';
 import SearchBar from './SearchBar/SearchBar';
 import { useDebounce } from '../../hooks/useDebounce';
