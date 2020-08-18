@@ -26,25 +26,6 @@ export default () => {
         return isInitialMount.current;
     }
 
-    const mapResponseToMovieObjects = (result: any) => {
-        return new Movie(
-            result.poster_path,
-            result.adult,
-            result.overview,
-            result.release_date,
-            result.genre_ids,
-            result.id,
-            result.original_title,
-            result.original_language,
-            result.title,
-            result.backdrop_path,
-            result.popularity,
-            result.vote_count,
-            result.video,
-            result.vote_average
-        );
-    }
-
     useEffect(() => {
         resetSearchResults();
     }, [searchTerm, resetSearchResults])
@@ -58,7 +39,7 @@ export default () => {
         const setStateBasedOnResponse = (response: any) => {
             setNumPages(response['total_pages']);
             setTotalResults(response['total_results']);
-            const newResults = response['results'].map(mapResponseToMovieObjects)
+            const newResults = response['results'].map(Movie.fromResponse)
             setSearchResults([...searchResults, ...newResults]);
             setIsLoading(false);
         }
