@@ -19,27 +19,27 @@ function App() {
       <SearchProvider>
         <FavouriteProvider>
           <WatchLaterProvider>
-            <div className='App' data-testid='app-element'>
-              <Switch>
-                <Route exact path='/'>
-                  <SearchPage></SearchPage>
-                </Route>
-                <Route path='/favourites'>
-                  <FavouritesPage></FavouritesPage>
-                </Route>
-                <Route path='/watch-later'>
-                  <WatchLaterPage></WatchLaterPage>
-                </Route>
-                <Route path='/movies/:id'>
-                  <MovieDetailsPage></MovieDetailsPage>
-                </Route>
-                <Route path='/genres'>
-                  <GenreProvider>
-                    <GenrePage></GenrePage>
-                  </GenreProvider>
-                </Route>
-              </Switch>
-            </div>
+            <GenreProvider>
+              <div className='App' data-testid='app-element'>
+                <Switch>
+                  <Route exact path='/'>
+                    <SearchPage></SearchPage>
+                  </Route>
+                  <Route path='/favourites'>
+                    <FavouritesPage></FavouritesPage>
+                  </Route>
+                  <Route path='/watch-later'>
+                    <WatchLaterPage></WatchLaterPage>
+                  </Route>
+                  <Route path='/movies/:id'>
+                    <MovieDetailsPage></MovieDetailsPage>
+                  </Route>
+                    <Route path='/genres'>
+                      <GenrePage></GenrePage>
+                    </Route>
+                </Switch>
+              </div>
+            </GenreProvider>
           </WatchLaterProvider>
         </FavouriteProvider>
       </SearchProvider>
