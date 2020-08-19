@@ -51,6 +51,12 @@ export default () => {
         return `${readableGenres} | ${runtime} | ${releaseDate}`;
     }
 
+    const getMovieDetails = (details: { [key: string] : JSX.Element }) => {
+        return Object.keys(details).map(detail => {
+            return <MovieDetail label={detail} value={details[detail]}></MovieDetail>
+        })
+    }
+
     const movieDetailsDiv = (result: MovieDetails) => {
         return <div className='Card'>
             <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
@@ -63,11 +69,7 @@ export default () => {
                     <img src={`https://image.tmdb.org/t/p/w200/${result.posterPath}`} alt='movie poster' />
                 </div>
                 <div className='TextDetails'>
-                    {
-                        Object.keys(details).map(detail => {
-                            return <MovieDetail label={detail} value={details[detail]}></MovieDetail>
-                        })
-                    }
+                    { getMovieDetails(details) }
                 </div>
             </div>
         </div>
