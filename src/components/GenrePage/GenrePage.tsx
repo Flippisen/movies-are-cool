@@ -37,6 +37,15 @@ export default () => {
         getListOfGenres();
     }
 
+    const resetPagesOnSortOrGenreChange = () => {
+        setMaxPages(undefined);
+        setCurrentPage(1);
+    }
+
+    useEffect(() => {
+        resetPagesOnSortOrGenreChange();
+    }, [selectedSortValue, selectedGenres])
+
     useEffect(() => {
         onGenreOrSortChangeGetNewResults(selectedGenres, currentPage, selectedSortValue);
     }, [selectedGenres, currentPage, selectedSortValue]);
