@@ -13,6 +13,8 @@ type State = {
     setMaxPages: React.Dispatch<React.SetStateAction<number | undefined>>;
     movieResults: Movie[];
     setMovieResults: React.Dispatch<React.SetStateAction<Movie[]>>;
+    selectedSortValue: string;
+    setSelectedSortValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 type GenreProviderProps = { children: React.ReactNode }
@@ -25,6 +27,8 @@ export const GenreProvider = ({ children }: GenreProviderProps) => {
     const [maxPages, setMaxPages] = useState<number | undefined>(undefined);
     const [movieResults, setMovieResults] = useState<Movie[]>([]);
     const [genreList, setGenreList] = useState<Genre[] | undefined>(undefined);
+    // TODO: don't hard code default
+    const [selectedSortValue, setSelectedSortValue] = useState<string>('popularity.desc');
 
     return <GenreContext.Provider value={{ 
         selectedGenres,
@@ -36,7 +40,9 @@ export const GenreProvider = ({ children }: GenreProviderProps) => {
         genreList, 
         setGenreList,
         maxPages, 
-        setMaxPages 
+        setMaxPages,
+        selectedSortValue,
+        setSelectedSortValue
     }}>
         {children}
     </GenreContext.Provider>
