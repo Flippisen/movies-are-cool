@@ -6,6 +6,7 @@ import './MovieDetailsPage.scss';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import format from 'date-fns/format';
 import Loading from '../Loading/Loading';
+import MovieDetail from './MovieDetail/MovieDetail';
 
 export default () => {
     const [result, setResult] = useState<MovieDetails | undefined>(undefined);
@@ -42,7 +43,7 @@ export default () => {
         getMovieById();
     }, [id])
 
-    const movieDetailsDiv = (result) => {
+    const movieDetailsDiv = (result: MovieDetails) => {
         return <div className='Card'>
             <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
             <div className='Tagline'>{result.tagline}</div>
@@ -56,14 +57,7 @@ export default () => {
                 <div className='TextDetails'>
                     {
                         Object.keys(details).map(detail => {
-                            return <div className='Detail' key={detail}>
-                                <div className='DetailLabel'>
-                                    {detail}:
-                                            </div>
-                                <div className='DetailValue'>
-                                    {details[detail]}
-                                </div>
-                            </div>
+                            return <MovieDetail label={detail} value={details[detail]}></MovieDetail>
                         })
                     }
                 </div>
