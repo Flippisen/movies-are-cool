@@ -49,6 +49,13 @@ test('When genre list is updated, fetch request should be made', async () => {
 
 
     await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(2));
+    expect(window.fetch).toHaveBeenNthCalledWith(2,
+        'https://api.themoviedb.org/3/discover/movie?api_key=e700250595abfd12d46b05e82480206c&with_genres=1&sort_by=popularity.desc&page=1',
+        {
+            method: 'GET',
+            signal: undefined
+        }
+    )
 });
 
 test('Clicking on next and previous page buttons should call fetch', async () => {
@@ -77,9 +84,23 @@ test('Clicking on next and previous page buttons should call fetch', async () =>
     const nextPageIcon = screen.getByLabelText('Go to next page');
     fireEvent.click(nextPageIcon);
     await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(3));
+    expect(window.fetch).toHaveBeenNthCalledWith(3,
+        'https://api.themoviedb.org/3/discover/movie?api_key=e700250595abfd12d46b05e82480206c&with_genres=1&sort_by=popularity.desc&page=2',
+        {
+            method: 'GET',
+            signal: undefined
+        }
+    )
     const previousPageIcon = screen.getByLabelText('Go to previous page');
     fireEvent.click(previousPageIcon);
     await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(4));
+    expect(window.fetch).toHaveBeenNthCalledWith(4,
+        'https://api.themoviedb.org/3/discover/movie?api_key=e700250595abfd12d46b05e82480206c&with_genres=1&sort_by=popularity.desc&page=1',
+        {
+            method: 'GET',
+            signal: undefined
+        }
+    )
 });
 
 test('When sort type is updated, fetch request should be made', async () => {
@@ -115,4 +136,11 @@ test('When sort type is updated, fetch request should be made', async () => {
 
     selectMaterialUiSelectOption(sortDropdown, 'Release Date Desc');
     await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(3));
+    expect(window.fetch).toHaveBeenNthCalledWith(3, 
+        'https://api.themoviedb.org/3/discover/movie?api_key=e700250595abfd12d46b05e82480206c&with_genres=1&sort_by=release_date.desc&page=1',
+        {
+            method: 'GET',
+            signal: undefined
+        }
+    )
 });
