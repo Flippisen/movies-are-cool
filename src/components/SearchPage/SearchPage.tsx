@@ -6,6 +6,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import './SearchPage.scss';
 import { Movie } from '../../models/movie';
 import MovieList from '../MovieList/MovieList';
+import { searchMovies } from '../../services/search';
 
 export default () => {
     const [page, setPage] = useState(1);
@@ -36,11 +37,10 @@ export default () => {
             setSearchResults(searchResults);
         }
 
-        const setStateBasedOnResponse = (response: any) => {
-            setNumPages(response['total_pages']);
-            setTotalResults(response['total_results']);
-            const newResults = response['results'].map(Movie.fromResponse)
-            setSearchResults([...searchResults, ...newResults]);
+        const setStateBasedOnResponse = (results: Movie[], maxPages: number, totalResults: number) => {
+            setNumPages(maxPages);
+            setTotalResults(totalResults);
+            setSearchResults([...searchResults, ...results]);
             setIsLoading(false);
         }
 
@@ -55,9 +55,9 @@ export default () => {
         let cancelled = false;
         const getSearchResults = async () => {
             setIsLoading(true);
-            const response = await makeApiCall('/search/movie', ApiMethods.GET, { query: debouncedSearchTerm, page: page }, abortController.signal);
+            const { results, maxPages, totalResults } = await searchMovies(debouncedSearchTerm, page, abortController.signal);
             if (!cancelled) {
-                setStateBasedOnResponse(response);
+                setStateBasedOnResponse(results, maxPages, totalResults);
             }
 
         }
