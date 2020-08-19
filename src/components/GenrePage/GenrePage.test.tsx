@@ -3,6 +3,7 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { GenreProvider } from '../../contexts/GenreContext';
 import GenrePage from './GenrePage';
 import { selectMaterialUiSelectOption } from '../../../test/MaterialTestUtils';
+import userEvent from '@testing-library/user-event';
 
 
 beforeEach(() => {
@@ -79,4 +80,39 @@ test('Clicking on next and previous page buttons should call fetch', async () =>
     const previousPageIcon = screen.getByLabelText('Go to previous page');
     fireEvent.click(previousPageIcon);
     await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(4));
+});
+
+test('When sort type is updated, fetch request should be made', async () => {
+    window.fetch = (window.fetch as jest.Mock).mockImplementation(() => {
+        return {
+            ok: true,
+            status: 200,
+            json: async () => ({
+                'total_results': 0,
+                'total_pages': 0,
+                results: []
+            })
+        }
+    })
+
+
+    await waitFor(() => expect(window.fetch).toHaveBeenCalled());
+    const genreDropdown = screen.getByTestId('genre-dropdown-input');
+    if (!genreDropdown) {
+        throw new Error('test failed');
+    }
+
+    selectMaterialUiSelectOption(genreDropdown, 'test-genre');
+    userEvent.click(screen.getByRole('presentation').children[0]);
+
+    await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(2));
+    
+    const sortDropdown = screen.getByTestId('sort-dropdown-input');
+    if (!sortDropdown) {
+        throw new Error('test failed');
+    }
+
+
+    selectMaterialUiSelectOption(sortDropdown, 'Release Date Desc');
+    await waitFor(() => expect(window.fetch).toHaveBeenCalledTimes(3));
 });
