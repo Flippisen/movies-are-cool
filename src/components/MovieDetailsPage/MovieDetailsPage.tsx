@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom';
-import { Movie, MovieDetails } from '../../models/movie';
-import { apiUrl, makeApiCall, ApiMethods } from '../../services/api';
+import { useParams } from 'react-router-dom';
+import { MovieDetails } from '../../models/movie';
+import { makeApiCall, ApiMethods } from '../../services/api';
 import './MovieDetailsPage.scss';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import format from 'date-fns/format';
+import Loading from '../Loading/Loading';
 
 export default () => {
     const [result, setResult] = useState<MovieDetails | undefined>(undefined);
@@ -41,6 +42,35 @@ export default () => {
         getMovieById();
     }, [id])
 
+    const movieDetailsDiv = () => {
+        return <div className='Card'>
+            <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
+            <div className='Tagline'>{result.tagline}</div>
+            <div className='ImportantDetails'>
+                {result.genres.map(x => x.name).join(', ')} | {result.runtime} minutes | {format(result.releaseDate, 'd LLLL yyyy')}
+            </div>
+            <div className='Details'>
+                <div className='Poster'>
+                    <img src={`https://image.tmdb.org/t/p/w200/${result.posterPath}`} alt='movie poster' />
+                </div>
+                <div className='TextDetails'>
+                    {
+                        Object.keys(details).map(detail => {
+                            return <div className='Detail' key={detail}>
+                                <div className='DetailLabel'>
+                                    {detail}:
+                                            </div>
+                                <div className='DetailValue'>
+                                    {details[detail]}
+                                </div>
+                            </div>
+                        })
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
     return <div className='MovieDetails'>
         <div className='BackButtonContainer'>
             <div onClick={e => window.history.back()} className='BackButtonLink'>
@@ -49,37 +79,10 @@ export default () => {
         </div>
         { !isLoading ? 
             <div className='Container'>
-                { result &&
-                    <div className='Card'>
-                        <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
-                        <div className='Tagline'>{result.tagline}</div>
-                        <div className='ImportantDetails'>
-                            { result.genres.map(x => x.name).join(', ')} | { result.runtime } minutes | {format(result.releaseDate, 'd LLLL yyyy')}
-                        </div>
-                        <div className='Details'>
-                            <div className='Poster'>
-                                <img src={`https://image.tmdb.org/t/p/w200/${result.posterPath}`} alt='movie poster' />
-                            </div>
-                            <div className='TextDetails'>
-                                {
-                                    Object.keys(details).map(detail => {
-                                        return <div className='Detail' key={detail}>
-                                            <div className='DetailLabel'>
-                                                {detail}:
-                                            </div>
-                                            <div className='DetailValue'>
-                                                {details[detail]}
-                                            </div>
-                                        </div>
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </div>
-                }
+                { result && movieDetailsDiv }
             </div>
             :
-            <div className='Loading'>Loading...</div>
+            <Loading></Loading>
         }
     </div>
 }

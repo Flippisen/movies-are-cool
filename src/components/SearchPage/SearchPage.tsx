@@ -81,7 +81,7 @@ export default () => {
                     <div className='ButtonContainer'>
                         <div className='Button LoadMore' onClick={e => setPage(page + 1)}>
                             Load more
-                                </div>
+                        </div>
                     </div>
                 }
             </div>
