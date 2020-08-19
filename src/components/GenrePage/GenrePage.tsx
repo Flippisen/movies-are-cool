@@ -8,6 +8,7 @@ import Loading from '../Loading/Loading';
 import MovieList from '../MovieList/MovieList';
 import Pagination from '../Pagination/Pagination';
 import SortDropdown from './SortDropdown/SortDropdown';
+import { discoverMovieGenres } from '../../services/discover';
 
 export default () => {
     const { selectedGenres, movieResults, setMovieResults, currentPage, setCurrentPage, maxPages, setMaxPages, selectedSortValue } = useGenreState();
@@ -22,15 +23,8 @@ export default () => {
         }
         const getListOfGenres = async () => {
             setIsLoading(true);
-            const response = await makeApiCall('/discover/movie', ApiMethods.GET, 
-                { 
-                    'with_genres': selectedGenres.join(','),
-                    'sort_by': selectedSortValue, 
-                    'page': currentPage
-                });
-            const newResults = response['results'].map(Movie.fromResponse)
-            const maxPages = response['total_pages'];
-            setMovieResults(newResults);
+            const { results, maxPages } = await discoverMovieGenres(selectedGenres, selectedSortValue, currentPage);
+            setMovieResults(results);
             setMaxPages(maxPages);
             setIsLoading(false);
         }
