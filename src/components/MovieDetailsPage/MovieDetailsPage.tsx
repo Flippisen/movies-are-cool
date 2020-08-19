@@ -43,12 +43,20 @@ export default () => {
         getMovieById();
     }, [id])
 
+    const getMovieImportantDetails = (result: MovieDetails) => {
+        const readableGenres = result.genres.map(x => x.name).join(', ');
+        const runtime = `${result.runtime} minutes`;
+        const releaseDate = format(result.releaseDate, 'd LLLL yyyy');
+
+        return `${readableGenres} | ${runtime} | ${releaseDate}`;
+    }
+
     const movieDetailsDiv = (result: MovieDetails) => {
         return <div className='Card'>
             <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
             <div className='Tagline'>{result.tagline}</div>
             <div className='ImportantDetails'>
-                {result.genres.map(x => x.name).join(', ')} | {result.runtime} minutes | {format(result.releaseDate, 'd LLLL yyyy')}
+                { getMovieImportantDetails(result) }
             </div>
             <div className='Details'>
                 <div className='Poster'>
