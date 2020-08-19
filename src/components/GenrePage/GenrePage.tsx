@@ -13,7 +13,6 @@ export default () => {
     const [isLoading, setIsLoading] = useState(false);
     
     const onSelectedGenreChangeGetNewResults = (selectedGenres: number[]) => {
-        console.log(selectedGenres);
         if (!selectedGenres || selectedGenres.length === 0) {
             setMovieResults([]);
             setCurrentPage(1);
