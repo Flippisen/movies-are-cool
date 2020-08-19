@@ -13,6 +13,10 @@
 
     .header-row {
         justify-content: flex-start;
+
+        > * {
+            padding-right: $padding-medium;
+        }
     }
 
     .footer {
