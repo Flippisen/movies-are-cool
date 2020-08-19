@@ -34,8 +34,8 @@ export default () => {
             multiple
             value={selectedGenres}
             onChange={onSelectedGenreChange}
-            input={<Input />}
-            data-testid='genre-dropdown'
+            input={<Input data-testid='genre-dropdown-input'/>}
+
         >
             {genreList && genreList.map((genre: Genre) => (
                 <MenuItem key={genre.id} value={genre.id}>
