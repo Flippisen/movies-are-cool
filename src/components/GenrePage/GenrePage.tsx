@@ -7,6 +7,7 @@ import { Movie } from '../../models/movie';
 import Loading from '../Loading/Loading';
 import MovieList from '../MovieList/MovieList';
 import Pagination from '../Pagination/Pagination';
+import SortDropdown from './SortDropdown/SortDropdown';
 
 export default () => {
     const { selectedGenres, movieResults, setMovieResults, currentPage, setCurrentPage, maxPages, setMaxPages } = useGenreState();
@@ -38,6 +39,7 @@ export default () => {
     return <div className='genre-page'>
         <div className='header-row'>
             <GenreDropdown></GenreDropdown>
+            <SortDropdown></SortDropdown>
         </div>
         <div>
             {isLoading ? 
