@@ -1,4 +1,4 @@
-class SortOption {
+export class SortOption {
     public id: string;
     public displayValue: string;
 
@@ -8,7 +8,7 @@ class SortOption {
     }
 }
 
-export const SortOptions: SortOption[] = [
+export const sortOptions: SortOption[] = [
     new SortOption('popularity.asc', 'Popularity Asc'),
     new SortOption('popularity.desc', 'Popularity Desc'),
     new SortOption('release_date.asc', 'Release Date Asc'),
