@@ -42,7 +42,7 @@ export default () => {
         getMovieById();
     }, [id])
 
-    const movieDetailsDiv = () => {
+    const movieDetailsDiv = (result) => {
         return <div className='Card'>
             <div className='Title'>{result.title} ({result.releaseDate.getFullYear()})</div>
             <div className='Tagline'>{result.tagline}</div>
@@ -79,7 +79,7 @@ export default () => {
         </div>
         { !isLoading ? 
             <div className='Container'>
-                { result && movieDetailsDiv }
+                { result && movieDetailsDiv(result) }
             </div>
             :
             <Loading></Loading>
