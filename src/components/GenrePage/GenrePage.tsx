@@ -13,7 +13,7 @@ export default () => {
     const { selectedGenres, movieResults, setMovieResults, currentPage, setCurrentPage, maxPages, setMaxPages, selectedSortValue } = useGenreState();
     const [isLoading, setIsLoading] = useState(false);
     
-    const onGenreOrSortChangeGetNewResults = (selectedGenres: number[]) => {
+    const onGenreOrSortChangeGetNewResults = (selectedGenres: number[], currentPage: number, selectedSortValue: string) => {
         if (!selectedGenres || selectedGenres.length === 0) {
             setMovieResults([]);
             setCurrentPage(1);
@@ -22,7 +22,12 @@ export default () => {
         }
         const getListOfGenres = async () => {
             setIsLoading(true);
-            const response = await makeApiCall('/discover/movie', ApiMethods.GET, { 'with_genres': selectedGenres.join(','), 'sort_by': selectedSortValue});
+            const response = await makeApiCall('/discover/movie', ApiMethods.GET, 
+                { 
+                    'with_genres': selectedGenres.join(','),
+                    'sort_by': selectedSortValue, 
+                    'page': currentPage
+                });
             const newResults = response['results'].map(Movie.fromResponse)
             const maxPages = response['total_pages'];
             setMovieResults(newResults);
@@ -33,7 +38,7 @@ export default () => {
     }
 
     useEffect(() => {
-        onGenreOrSortChangeGetNewResults(selectedGenres);
+        onGenreOrSortChangeGetNewResults(selectedGenres, currentPage, selectedSortValue);
     }, [selectedGenres, currentPage, selectedSortValue]);
 
     return <div className='genre-page'>
