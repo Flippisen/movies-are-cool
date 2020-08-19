@@ -10,10 +10,10 @@ import Pagination from '../Pagination/Pagination';
 import SortDropdown from './SortDropdown/SortDropdown';
 
 export default () => {
-    const { selectedGenres, movieResults, setMovieResults, currentPage, setCurrentPage, maxPages, setMaxPages } = useGenreState();
+    const { selectedGenres, movieResults, setMovieResults, currentPage, setCurrentPage, maxPages, setMaxPages, selectedSortValue } = useGenreState();
     const [isLoading, setIsLoading] = useState(false);
     
-    const onSelectedGenreChangeGetNewResults = (selectedGenres: number[]) => {
+    const onGenreOrSortChangeGetNewResults = (selectedGenres: number[]) => {
         if (!selectedGenres || selectedGenres.length === 0) {
             setMovieResults([]);
             setCurrentPage(1);
@@ -22,7 +22,7 @@ export default () => {
         }
         const getListOfGenres = async () => {
             setIsLoading(true);
-            const response = await makeApiCall('/discover/movie', ApiMethods.GET, { 'with_genres': selectedGenres.join(',')});
+            const response = await makeApiCall('/discover/movie', ApiMethods.GET, { 'with_genres': selectedGenres.join(','), 'sort_by': selectedSortValue});
             const newResults = response['results'].map(Movie.fromResponse)
             const maxPages = response['total_pages'];
             setMovieResults(newResults);
@@ -33,8 +33,8 @@ export default () => {
     }
 
     useEffect(() => {
-        onSelectedGenreChangeGetNewResults(selectedGenres);
-    }, [selectedGenres, currentPage]);
+        onGenreOrSortChangeGetNewResults(selectedGenres);
+    }, [selectedGenres, currentPage, selectedSortValue]);
 
     return <div className='genre-page'>
         <div className='header-row'>
