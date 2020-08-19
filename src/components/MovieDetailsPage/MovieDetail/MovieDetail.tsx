@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default (props: Props) => {
-    return <div className='Detail' key={props.label}>
+    return <div className='Detail'>
         <div className='DetailLabel'>
             {props.label}:
         </div>

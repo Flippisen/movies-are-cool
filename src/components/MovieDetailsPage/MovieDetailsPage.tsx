@@ -53,7 +53,7 @@ export default () => {
 
     const getMovieDetails = (details: { [key: string] : JSX.Element }) => {
         return Object.keys(details).map(detail => {
-            return <MovieDetail label={detail} value={details[detail]}></MovieDetail>
+            return <MovieDetail label={detail} value={details[detail]} key={detail}></MovieDetail>
         })
     }
 
