@@ -10,3 +10,21 @@ export const apiUrl = (route: string, params?: { [key: string]: (string | number
     
     return `${baseUrl}&${paramsString}`;
 }
+
+export enum ApiMethods {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE'
+}
+
+export const makeApiCall = async <T = any>(route: string, method: ApiMethods, params?: { [key: string]: (string | number | boolean) }, signal?: AbortSignal): Promise<T> => {
+    const results = await fetch(
+        apiUrl(route, params),
+        {
+            method: 'GET',
+            signal: signal
+        }
+    );
+    return results.json();
+}

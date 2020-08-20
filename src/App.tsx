@@ -9,6 +9,8 @@ import { WatchLaterProvider } from './contexts/WatchLaterContext';
 import FavouritesPage from './components/FavouritesPage/FavouritesPage';
 import WatchLaterPage from './components/WatchLaterPage/WatchLaterPage';
 import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage';
+import GenrePage from './components/GenrePage/GenrePage';
+import { GenreProvider } from './contexts/GenreContext';
 
 function App() {
   return (
@@ -17,22 +19,27 @@ function App() {
       <SearchProvider>
         <FavouriteProvider>
           <WatchLaterProvider>
-            <div className='App' data-testid='app-element'>
-              <Switch>
-                <Route exact path='/'>
-                  <SearchPage></SearchPage>
-                </Route>
-                <Route path='/favourites'>
-                  <FavouritesPage></FavouritesPage>
-                </Route>
-                <Route path='/watch-later'>
-                  <WatchLaterPage></WatchLaterPage>
-                </Route>
-                <Route path='/movies/:id'>
-                  <MovieDetailsPage></MovieDetailsPage>
-                </Route>
-              </Switch>
-            </div>
+            <GenreProvider>
+              <div className='App' data-testid='app-element'>
+                <Switch>
+                  <Route exact path='/'>
+                    <SearchPage></SearchPage>
+                  </Route>
+                  <Route path='/favourites'>
+                    <FavouritesPage></FavouritesPage>
+                  </Route>
+                  <Route path='/watch-later'>
+                    <WatchLaterPage></WatchLaterPage>
+                  </Route>
+                  <Route path='/movies/:id'>
+                    <MovieDetailsPage></MovieDetailsPage>
+                  </Route>
+                    <Route path='/genres'>
+                      <GenrePage></GenrePage>
+                    </Route>
+                </Switch>
+              </div>
+            </GenreProvider>
           </WatchLaterProvider>
         </FavouriteProvider>
       </SearchProvider>

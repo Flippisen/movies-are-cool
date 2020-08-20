@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { apiUrl } from '../../services/api';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { ApiMethods, makeApiCall } from '../../services/api';
 import { useSearchState } from '../../contexts/SearchContext';
 import SearchBar from './SearchBar/SearchBar';
 import { useDebounce } from '../../hooks/useDebounce';
 import './SearchPage.scss';
 import { Movie } from '../../models/movie';
 import MovieList from '../MovieList/MovieList';
+import { searchMovies } from '../../services/search';
 
 export default () => {
     const [page, setPage] = useState(1);
@@ -16,16 +17,35 @@ export default () => {
     const debouncedSearchTerm = useDebounce<string>(searchTerm, 150);
     const isInitialMount = useRef(true);
 
-    useEffect(() => {
+    const resetSearchResults = useCallback(() => {
         setSearchResults([]);
         setNumPages(1);
         setTotalResults(0);
-    }, [searchTerm])
+    }, [setSearchResults]);
+
+    const isFirstMount = () => {
+        return isInitialMount.current;
+    }
 
     useEffect(() => {
-        if(isInitialMount.current) {
+        resetSearchResults();
+    }, [searchTerm, resetSearchResults])
+
+    useEffect(() => {
+        const loadCachedResults = () => {
             isInitialMount.current = false;
             setSearchResults(searchResults);
+        }
+
+        const setStateBasedOnResponse = (results: Movie[], maxPages: number, totalResults: number) => {
+            setNumPages(maxPages);
+            setTotalResults(totalResults);
+            setSearchResults([...searchResults, ...results]);
+            setIsLoading(false);
+        }
+
+        if (isFirstMount()) {
+            loadCachedResults();
             return;
         }
         if (debouncedSearchTerm === '') {
@@ -35,35 +55,9 @@ export default () => {
         let cancelled = false;
         const getSearchResults = async () => {
             setIsLoading(true);
-            const results = await fetch(
-                apiUrl('/search/movie', { query: debouncedSearchTerm, page: page}),
-                {
-                    method: 'GET',
-                    signal: abortController.signal
-                }
-            );
-            const response = await results.json();
+            const { results, maxPages, totalResults } = await searchMovies(debouncedSearchTerm, page, abortController.signal);
             if (!cancelled) {
-                setNumPages(response['total_pages']);
-                setTotalResults(response['total_results']);
-                const newResults = response['results'].map((result: any) => new Movie(
-                    result.poster_path,
-                    result.adult,
-                    result.overview,
-                    result.release_date,
-                    result.genre_ids,
-                    result.id,
-                    result.original_title,
-                    result.original_language,
-                    result.title,
-                    result.backdrop_path,
-                    result.popularity,
-                    result.vote_count,
-                    result.video,
-                    result.vote_average
-                ))
-                setSearchResults([...searchResults, ...newResults]);
-                setIsLoading(false);
+                setStateBasedOnResponse(results, maxPages, totalResults);
             }
 
         }
@@ -87,7 +81,7 @@ export default () => {
                     <div className='ButtonContainer'>
                         <div className='Button LoadMore' onClick={e => setPage(page + 1)}>
                             Load more
-                                </div>
+                        </div>
                     </div>
                 }
             </div>

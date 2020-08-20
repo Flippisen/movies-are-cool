@@ -45,6 +45,25 @@ export class Movie {
         this.video = video;
         this.voteAverage = voteAverage;
     }
+
+    public static fromResponse(response: any): Movie {
+        return new Movie(
+            response.poster_path,
+            response.adult,
+            response.overview,
+            response.release_date,
+            response.genre_ids,
+            response.id,
+            response.original_title,
+            response.original_language,
+            response.title,
+            response.backdrop_path,
+            response.popularity,
+            response.vote_count,
+            response.video,
+            response.vote_average
+        );
+    }
 }
 
 export class MovieDetails extends Movie {
@@ -114,6 +133,40 @@ export class MovieDetails extends Movie {
         this.spokenLanguage = spokenLanguage;
         this.status = status;
         this.tagline = tagline;
+    }
+
+    public static fromResponse(response: any): MovieDetails {
+        return new MovieDetails(
+            response.poster_path,
+            response.adult,
+            response.overview,
+            response.release_date,
+            response.genre_ids,
+            response.id,
+            response.original_title,
+            response.original_language,
+            response.title,
+            response.backdrop_path,
+            response.popularity,
+            response.vote_count,
+            response.video,
+            response.vote_average,
+            response.belongs_to_collection,
+            response.budget,
+            response.genres,
+            response.homepage,
+            response.imdb_id,
+            response.production_companies,
+            response.revenue,
+            response.runtime,
+            response.spoken_language,
+            response.status,
+            response.tagline
+        );
+    }
+
+    get profit() {
+        return this.revenue - this.budget;
     }
 }
 

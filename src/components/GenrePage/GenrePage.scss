@@ -1,0 +1,25 @@
+@import 'public/variables.scss';
+
+.genre-page {
+    #genre-dropdown {
+        width: 180px;
+    }
+
+    .header-row,
+    .footer {
+        padding: $padding-medium;
+        display: flex;
+    }
+
+    .header-row {
+        justify-content: flex-start;
+
+        > * {
+            padding-right: $padding-medium;
+        }
+    }
+
+    .footer {
+        justify-content: center;
+    }
+}
